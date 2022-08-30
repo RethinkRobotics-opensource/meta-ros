@@ -2986,7 +2986,6 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     ${ROS_UNRESOLVED_DEP-sdformat12} \
     ${ROS_UNRESOLVED_DEP-spacenavd} \
     ${ROS_UNRESOLVED_DEP-sqlite3} \
-    ${ROS_UNRESOLVED_DEP-uncrustify} \
     ${ROS_UNRESOLVED_DEP-wireguard} \
     acl \
     adwaita-icon-theme \
@@ -3138,6 +3137,7 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     suitesparse-cxsparse \
     tbb \
     udev \
+    uncrustify \
     urdfdom \
     urdfdom-headers \
     util-linux \
@@ -3623,7 +3623,6 @@ ROS_UNRESOLVED_DEP-rti-connext-dds-6.0.1 = "ROS_UNRESOLVED_DEP-rti-connext-dds-6
 ROS_UNRESOLVED_DEP-sdformat12 = "ROS_UNRESOLVED_DEP-sdformat12"
 ROS_UNRESOLVED_DEP-spacenavd = "ROS_UNRESOLVED_DEP-spacenavd"
 ROS_UNRESOLVED_DEP-sqlite3 = "ROS_UNRESOLVED_DEP-sqlite3"
-ROS_UNRESOLVED_DEP-uncrustify = "ROS_UNRESOLVED_DEP-uncrustify"
 ROS_UNRESOLVED_DEP-wireguard = "ROS_UNRESOLVED_DEP-wireguard"
 
 # From the release announcement or the last field of the "<ROS_DISTRO>/YYYY-MM-DD" tag for the release in

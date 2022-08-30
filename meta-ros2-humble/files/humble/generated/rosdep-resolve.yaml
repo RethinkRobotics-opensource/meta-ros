@@ -489,7 +489,7 @@ tinyxml:
 tinyxml2:
 - libtinyxml2@meta-oe
 uncrustify:
-- ${ROS_UNRESOLVED_DEP-uncrustify}
+- uncrustify@meta-ros-common
 uuid:
 - util-linux@openembedded-core
 v4l-utils:
