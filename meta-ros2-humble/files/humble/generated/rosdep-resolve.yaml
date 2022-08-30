@@ -316,7 +316,7 @@ protobuf-dev:
 pugixml-dev:
 - pugixml@meta-oe
 pybind11-dev:
-- ${ROS_UNRESOLVED_DEP-pybind11-dev}
+- python3-pybind11@meta-python
 pydocstyle:
 - ${PYTHON_PN}-pydocstyle@meta-ros-common
 pyflakes3:
