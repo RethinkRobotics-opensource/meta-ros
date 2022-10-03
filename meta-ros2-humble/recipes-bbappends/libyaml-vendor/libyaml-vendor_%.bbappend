@@ -1,4 +1,6 @@
-DEPENDS:append = "libyaml"
+DEPENDS:append = " \
+    libyaml \
+" 
 
 # Added patch from upstream to detect if libyaml is already installed
 # before building

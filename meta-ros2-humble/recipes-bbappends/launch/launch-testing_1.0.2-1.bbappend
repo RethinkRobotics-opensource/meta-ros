@@ -4,4 +4,3 @@
 FILES:${PN}:prepend = " \
     ${datadir}/lib/${ROS_BPN} \
 "
-

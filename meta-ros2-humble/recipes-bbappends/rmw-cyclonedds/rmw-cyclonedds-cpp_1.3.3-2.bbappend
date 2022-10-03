@@ -1,10 +1,9 @@
-# Copyright (c) 2019 LG Electronics, Inc.
-
-ROS_BUILDTOOL_DEPENDS += " \
-    rosidl-cmake-native \
-    rosidl-generator-cpp-native \
-    rosidl-default-runtime \
+ROS_BUILD_DEPENDS:append = " \
+    fastrtps-cmake-module \
+    fastcdr \
+    rosidl-typesupport-c \
+    rosidl-typesupport-cpp \
+    rosidl-typesupport-fastrtps-c \
+    rosidl-generator-c \
+    rosidl-generator-cpp \
 "
-
-# for rmw-implementation
-BBCLASSEXTEND = "native"

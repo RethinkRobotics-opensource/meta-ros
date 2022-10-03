@@ -1,5 +1,3 @@
-DEPENDS += " \
+DEPENDS:append = " \
     rosidl-cmake \
 "
-
-inherit distutils3-base

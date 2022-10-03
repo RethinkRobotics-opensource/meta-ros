@@ -1,10 +1,10 @@
-inherit distutils3-base
-
+ROS_BUILD_DEPENDS += " \
+    python3-numpy \
+"
 ROS_EXPORT_DEPENDS += " \
     rosidl-generator-c \
     rosidl-typesupport-c \
-    python3-numpy \
+    rosidl-typesupport-cpp \
+    rosidl-typesupport-fastrtps-c \
+    rosidl-typesupport-fastrtps-cpp \
 "
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
-SRC_URI += "file://0001-Revert-Install-generated-Python-interfaces-in-a-Pyth.patch"

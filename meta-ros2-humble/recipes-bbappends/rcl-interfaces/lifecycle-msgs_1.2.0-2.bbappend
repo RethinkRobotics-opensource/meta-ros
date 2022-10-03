@@ -1,7 +1,3 @@
-inherit distutils3-base
-
-# resolves missing #include <crypt.h>
-DEPENDS += " \
-    libxcrypt \
+ROS_BUILD_DEPENDS:append = " \
     rosidl-default-runtime \
-" 
+"
