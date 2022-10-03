@@ -1,0 +1,41 @@
+From 92f04b3ed3704d20525a1ab144774587d13d1ee6 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Fri, 23 Sep 2022 16:59:41 +0200
+Subject: [PATCH] ament_python_install_package: fixing shebang
+
+For whatever reason, when installing scripts with setuptools
+the shebang line will be replaced with the interpreter
+path that is currently executed:
+
+https://docs.python.org/3/distutils/setupscript.html#installing-scripts
+
+This is about the dumbest thing I have seen in a while. Anyhow,
+we will try to set the shebang line here back to something generic
+like
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ cmake/ament_python_install_package.cmake | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/cmake/ament_python_install_package.cmake b/cmake/ament_python_install_package.cmake
+index d035ff9ab..c5cedbd33 100644
+--- a/cmake/ament_python_install_package.cmake
++++ b/cmake/ament_python_install_package.cmake
+@@ -81,6 +81,7 @@ function(_ament_cmake_python_install_package package_name)
+         "'PYTHON_INSTALL_DIR' must not be empty")
+     endif()
+     set(ARG_DESTINATION ${PYTHON_INSTALL_DIR})
++    message(STATUS "DEBUG DEBUG: ARG_DESTINATION: ${ARG_DESTINATION}")
+   endif()
+ 
+   set(build_dir "${CMAKE_CURRENT_BINARY_DIR}/ament_cmake_python/${package_name}")
+@@ -161,7 +162,7 @@ setup(
+ 
+     add_custom_target(
+       ament_cmake_python_build_${package_name}_scripts ALL
+-      COMMAND ${python_interpreter} setup.py install_scripts -d scripts
++      COMMAND ${python_interpreter} setup.py install_scripts -d scripts --executable "/usr/bin/env python3"
+       WORKING_DIRECTORY "${build_dir}"
+       DEPENDS ${egg_dependencies}
+     )

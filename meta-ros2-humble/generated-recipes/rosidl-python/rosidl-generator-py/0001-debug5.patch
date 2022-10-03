@@ -1,0 +1,69 @@
+From 602fb6a17755dfaefce6a0e454d1a0e9ed5d929f Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 21 Sep 2022 11:44:09 +0200
+Subject: [PATCH] debug5
+
+---
+ ...idl_generator_py_generate_interfaces.cmake | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/cmake/rosidl_generator_py_generate_interfaces.cmake b/cmake/rosidl_generator_py_generate_interfaces.cmake
+index 1b06391..7b7b695 100644
+--- a/cmake/rosidl_generator_py_generate_interfaces.cmake
++++ b/cmake/rosidl_generator_py_generate_interfaces.cmake
+@@ -52,7 +52,7 @@ foreach(_abs_idl_file ${rosidl_generate_interfaces_ABS_IDL_FILES})
+ endforeach()
+ 
+ file(MAKE_DIRECTORY "${_output_path}")
+-message(INFO "DEBUG DEBUG: file write _output_path: ${_output_path}")
++message(STATUS "DEBUG DEBUG: file write _output_path: ${_output_path}")
+ file(WRITE "${_output_path}/__init__.py" "")
+ 
+ # collect relative paths of directories containing to-be-installed Python modules
+@@ -61,7 +61,7 @@ set(_generated_py_dirs "")
+ foreach(_generated_py_file ${_generated_py_files})
+   get_filename_component(_parent_folder "${_generated_py_file}" DIRECTORY)
+   set(_init_module "${_parent_folder}/__init__.py")
+-  message(INFO "DEBUG DEBUG: _init_module: ${_init_module}")
++  message(STATUS "DEBUG DEBUG: _init_module: ${_init_module}")
+   list(FIND _generated_py_files "${_init_module}" _index)
+   if(_index EQUAL -1)
+     list(APPEND _generated_py_files "${_init_module}")
+@@ -82,11 +82,11 @@ endif()
+ set(_dependency_files "")
+ set(_dependencies "")
+ foreach(_pkg_name ${rosidl_generate_interfaces_DEPENDENCY_PACKAGE_NAMES})
+-  message(INFO "DEBUG DEBUG: dependency package name: ${_pkg_name}")
++  message(STATUS "DEBUG DEBUG: dependency package name: ${_pkg_name}")
+   foreach(_idl_file ${${_pkg_name}_IDL_FILES})
+     set(_abs_idl_file "${${_pkg_name}_DIR}/../${_idl_file}")    
+     normalize_path(_abs_idl_file "${_abs_idl_file}")
+-    message(INFO "DEBUG DEBUG: abs_idl_file: ${_abs_idl_file}")
++    message(STATUS "DEBUG DEBUG: abs_idl_file: ${_abs_idl_file}")
+     list(APPEND _dependency_files "${_abs_idl_file}")
+     list(APPEND _dependencies "${_pkg_name}:${_abs_idl_file}")
+   endforeach()
+@@ -125,17 +125,18 @@ rosidl_write_generator_arguments(
+ )
+ 
+ if(NOT rosidl_generate_interfaces_SKIP_INSTALL)
+-  message(WARNING "DEBUG DEBUG: _output_path: ${_output_path}")
+-  message(WARNING "DEBUG DEBUG: DESTINATION: ${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}")
++  message(STATUS "DEBUG DEBUG: _output_path: ${_output_path}")
++  message(STATUS "DEBUG DEBUG: DESTINATION: ${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}")
+   ament_python_install_module("${_output_path}/__init__.py"
+     DESTINATION_SUFFIX "${PROJECT_NAME}"
+   )
+-
++  message(STATUS "DEBUG DEBUG: after: ${PYTHON_INSTALL_DIR}")
+   # TODO(esteve): replace this with ament_python_install_module and allow a list
+   # of modules to be passed instead of iterating over _generated_py_files
+   # See https://github.com/ros2/rosidl/issues/89
+-  foreach(_generated_py_dir ${_generated_py_dirs})
+-    message(INFO "esteve: intall dir: ${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}")
++  foreach(_generated_py_dir ${_generated_py_dirs})    
++    message(STATUS "DEBUG DEBUG: _generated_py_dir: ${_generated_py_dir}")
++    message(STATUS "DEBUG DEBUG esteve: intall dir: ${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir} - ${PYTHON_INSTALL_DIR} - ${PROJECT_NAME} - ${_generated_py_dir}")
+     install(DIRECTORY "${_output_path}/${_generated_py_dir}/"
+       DESTINATION "${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}"
+       PATTERN "*.py"

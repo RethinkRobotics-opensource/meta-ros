@@ -1,0 +1,26 @@
+From 23069cede2edfa372427c3e9f802d6c63eabc8f9 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Tue, 20 Sep 2022 11:21:36 +0200
+Subject: [PATCH] debug2
+
+---
+ cmake/rosidl_generator_py_generate_interfaces.cmake | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/cmake/rosidl_generator_py_generate_interfaces.cmake b/cmake/rosidl_generator_py_generate_interfaces.cmake
+index 575178c..33fc6ba 100644
+--- a/cmake/rosidl_generator_py_generate_interfaces.cmake
++++ b/cmake/rosidl_generator_py_generate_interfaces.cmake
+@@ -80,9 +80,11 @@ endif()
+ set(_dependency_files "")
+ set(_dependencies "")
+ foreach(_pkg_name ${rosidl_generate_interfaces_DEPENDENCY_PACKAGE_NAMES})
++  message(INFO "DEBUG DEBUG: dependency package name: ${_pkg_name}")
+   foreach(_idl_file ${${_pkg_name}_IDL_FILES})
+-    set(_abs_idl_file "${${_pkg_name}_DIR}/../${_idl_file}")
++    set(_abs_idl_file "${${_pkg_name}_DIR}/../${_idl_file}")    
+     normalize_path(_abs_idl_file "${_abs_idl_file}")
++    message(INFO "DEBUG DEBUG: abs_idl_file: ${_abs_idl_file}")
+     list(APPEND _dependency_files "${_abs_idl_file}")
+     list(APPEND _dependencies "${_pkg_name}:${_abs_idl_file}")
+   endforeach()

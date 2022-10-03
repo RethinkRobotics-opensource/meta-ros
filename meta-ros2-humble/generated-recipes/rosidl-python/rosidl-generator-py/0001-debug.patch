@@ -1,0 +1,22 @@
+From 2bc36920096398c36fcc9432a0e23cd389f660c7 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Tue, 20 Sep 2022 10:17:26 +0200
+Subject: [PATCH] debug
+
+---
+ cmake/rosidl_generator_py_generate_interfaces.cmake | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cmake/rosidl_generator_py_generate_interfaces.cmake b/cmake/rosidl_generator_py_generate_interfaces.cmake
+index 9d4ff1c..575178c 100644
+--- a/cmake/rosidl_generator_py_generate_interfaces.cmake
++++ b/cmake/rosidl_generator_py_generate_interfaces.cmake
+@@ -121,6 +121,8 @@ rosidl_write_generator_arguments(
+ )
+ 
+ if(NOT rosidl_generate_interfaces_SKIP_INSTALL)
++  message(WARNING "DEBUG DEBUG: _output_path: ${_output_path}")
++  message(WARNING "DEBUG DEBUG: DESTINATION: ${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}")
+   ament_python_install_module("${_output_path}/__init__.py"
+     DESTINATION_SUFFIX "${PROJECT_NAME}"
+   )

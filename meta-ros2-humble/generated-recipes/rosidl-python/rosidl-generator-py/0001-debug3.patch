@@ -1,0 +1,29 @@
+From ce0643b3d060df16698ddb7188f12a72be9d0438 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Tue, 20 Sep 2022 19:14:14 +0200
+Subject: [PATCH] debug3
+
+---
+ cmake/rosidl_generator_py_generate_interfaces.cmake | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cmake/rosidl_generator_py_generate_interfaces.cmake b/cmake/rosidl_generator_py_generate_interfaces.cmake
+index 60119ec..6716ba3 100644
+--- a/cmake/rosidl_generator_py_generate_interfaces.cmake
++++ b/cmake/rosidl_generator_py_generate_interfaces.cmake
+@@ -52,6 +52,7 @@ foreach(_abs_idl_file ${rosidl_generate_interfaces_ABS_IDL_FILES})
+ endforeach()
+ 
+ file(MAKE_DIRECTORY "${_output_path}")
++message(INFO "DEBUG DEBUG: file write _output_path: ${_output_path}")
+ file(WRITE "${_output_path}/__init__.py" "")
+ 
+ # collect relative paths of directories containing to-be-installed Python modules
+@@ -60,6 +61,7 @@ set(_generated_py_dirs "")
+ foreach(_generated_py_file ${_generated_py_files})
+   get_filename_component(_parent_folder "${_generated_py_file}" DIRECTORY)
+   set(_init_module "${_parent_folder}/__init__.py")
++  message(INFO "DEBUG DEBUG: _init_module: ${_init_module}")
+   list(FIND _generated_py_files "${_init_module}" _index)
+   if(_index EQUAL -1)
+     list(APPEND _generated_py_files "${_init_module}")

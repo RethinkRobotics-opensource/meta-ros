@@ -1,0 +1,21 @@
+From a50b8c262b7c65bd6b4c4976f3428053611bd911 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 21 Sep 2022 08:36:12 +0200
+Subject: [PATCH] debug4
+
+---
+ cmake/rosidl_generator_py_generate_interfaces.cmake | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cmake/rosidl_generator_py_generate_interfaces.cmake b/cmake/rosidl_generator_py_generate_interfaces.cmake
+index 6716ba3..1b06391 100644
+--- a/cmake/rosidl_generator_py_generate_interfaces.cmake
++++ b/cmake/rosidl_generator_py_generate_interfaces.cmake
+@@ -135,6 +135,7 @@ if(NOT rosidl_generate_interfaces_SKIP_INSTALL)
+   # of modules to be passed instead of iterating over _generated_py_files
+   # See https://github.com/ros2/rosidl/issues/89
+   foreach(_generated_py_dir ${_generated_py_dirs})
++    message(INFO "esteve: intall dir: ${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}")
+     install(DIRECTORY "${_output_path}/${_generated_py_dir}/"
+       DESTINATION "${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_generated_py_dir}"
+       PATTERN "*.py"
