@@ -641,3 +641,30 @@ RDEPENDS:${PN}:remove = " \
     depthai-bridge \
     depthai-ros \
 "
+
+# delayed cause have it in another place
+RDEPENDS:${PN}:remove = " \
+    phidgets-api \
+    libphidget22-upstream \
+    libphidget22 \
+    phidgets-magnetometer \
+    phidgets-temperature \
+    phidgets-accelerometer \
+    phidgets-high-speed-encoder \
+    phidgets-digital-outputs \
+    phidgets-gyroscope \
+    phidgets-motors \
+    phidgets-spatial \
+    phidgets-digital-inputs \
+    phidgets-analog-inputs \
+    phidgets-drivers \
+    phidgets-ik \
+    python-orocos-kdl-vendor \
+    python3-pykdl \
+"
+
+# delayed because could not find genicamConfig origin quickly
+RDEPENDS:${PN}:remove = " \
+    rc-genicam-api \
+    rc-genicam-driver \
+"
