@@ -5,5 +5,5 @@ EXTRA_OECMAKE:append = " \
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 # Patch upstream pending
 SRC_URI:append = " \
-    file://0001-CMakeLists.txt-fixing-detection-of-system-zstd.patch \
+    file://0001-Fix-zstd-vendor-does-not-find-system-zstd-1111.patch \
 "
