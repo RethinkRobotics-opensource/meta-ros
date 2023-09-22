@@ -57,9 +57,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros-gbp/perception_open3d-release/archive/release/humble/open3d_conversions/0.2.1-1.tar.gz
+# matches with: https://github.com/ros2-gbp/perception_open3d-release/archive/release/humble/open3d_conversions/0.2.1-1.tar.gz
 ROS_BRANCH ?= "branch=release/humble/open3d_conversions"
-SRC_URI = "git://github.com/ros-gbp/perception_open3d-release;${ROS_BRANCH};protocol=https"
+SRC_URI = "git://github.com/ros2-gbp/perception_open3d-release;${ROS_BRANCH};protocol=https"
 SRCREV = "abb156ecaeea530e1827480b0aa5245736087e3b"
 S = "${WORKDIR}/git"
 

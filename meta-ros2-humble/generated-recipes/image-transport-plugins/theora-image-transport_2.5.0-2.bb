@@ -17,11 +17,11 @@ ROS_CN = "image_transport_plugins"
 ROS_BPN = "theora_image_transport"
 
 ROS_BUILD_DEPENDS = " \
-    opencv \
     cv-bridge \
     image-transport \
     libogg \
     libtheora \
+    opencv \
     pluginlib \
     rclcpp \
     rcutils \
@@ -36,11 +36,11 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    opencv \
     cv-bridge \
     image-transport \
     libogg \
     libtheora \
+    opencv \
     pluginlib \
     rclcpp \
     rcutils \
@@ -51,11 +51,11 @@ ROS_EXPORT_DEPENDS = " \
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    opencv \
     cv-bridge \
     image-transport \
     libogg \
     libtheora \
+    opencv \
     pluginlib \
     rclcpp \
     rcutils \

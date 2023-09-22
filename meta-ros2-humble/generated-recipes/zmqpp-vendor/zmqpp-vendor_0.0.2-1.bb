@@ -49,9 +49,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/tier4/zmqpp_vendor-release/archive/release/humble/zmqpp_vendor/0.0.2-1.tar.gz
+# matches with: https://github.com/ros2-gbp/zmqpp_vendor-release/archive/release/humble/zmqpp_vendor/0.0.2-1.tar.gz
 ROS_BRANCH ?= "branch=release/humble/zmqpp_vendor"
-SRC_URI = "git://github.com/tier4/zmqpp_vendor-release;${ROS_BRANCH};protocol=https"
+SRC_URI = "git://github.com/ros2-gbp/zmqpp_vendor-release;${ROS_BRANCH};protocol=https"
 SRCREV = "f32bec184d70a43ff9813609caf5ac233648b717"
 S = "${WORKDIR}/git"
 

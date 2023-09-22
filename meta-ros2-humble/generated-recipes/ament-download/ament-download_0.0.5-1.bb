@@ -37,9 +37,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/samsung-ros/ament_download-release/archive/release/humble/ament_download/0.0.5-1.tar.gz
+# matches with: https://github.com/ros2-gbp/ament_download-release/archive/release/humble/ament_download/0.0.5-1.tar.gz
 ROS_BRANCH ?= "branch=release/humble/ament_download"
-SRC_URI = "git://github.com/samsung-ros/ament_download-release;${ROS_BRANCH};protocol=https"
+SRC_URI = "git://github.com/ros2-gbp/ament_download-release;${ROS_BRANCH};protocol=https"
 SRCREV = "5ba55f0a786b9a53b508396ccc70c417df56b665"
 S = "${WORKDIR}/git"
 

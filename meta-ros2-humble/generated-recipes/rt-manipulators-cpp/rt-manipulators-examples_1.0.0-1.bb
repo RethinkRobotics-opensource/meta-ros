@@ -52,9 +52,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/rt-net-gbp/rt_manipulators_cpp-release/archive/release/humble/rt_manipulators_examples/1.0.0-1.tar.gz
+# matches with: https://github.com/ros2-gbp/rt_manipulators_cpp-release/archive/release/humble/rt_manipulators_examples/1.0.0-1.tar.gz
 ROS_BRANCH ?= "branch=release/humble/rt_manipulators_examples"
-SRC_URI = "git://github.com/rt-net-gbp/rt_manipulators_cpp-release;${ROS_BRANCH};protocol=https"
+SRC_URI = "git://github.com/ros2-gbp/rt_manipulators_cpp-release;${ROS_BRANCH};protocol=https"
 SRCREV = "98e27025baea54bbdd1867df4b4134313a165324"
 S = "${WORKDIR}/git"
 

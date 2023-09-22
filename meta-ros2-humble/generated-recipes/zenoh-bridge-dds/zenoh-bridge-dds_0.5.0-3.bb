@@ -17,7 +17,7 @@ ROS_BPN = "zenoh_bridge_dds"
 
 ROS_BUILD_DEPENDS = " \
     ${ROS_UNRESOLVED_DEP-cargo} \
-    ${ROS_UNRESOLVED_DEP-clang} \
+    clang-native \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
