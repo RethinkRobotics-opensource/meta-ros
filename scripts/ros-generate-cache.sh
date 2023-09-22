@@ -89,6 +89,7 @@ abort=false
 for f in $ROSDEP_YAML_BASENAMES; do
     if ! grep -q "^yaml file://$path_to_ros_rosdistro/rosdep/$f.yaml\$" /etc/ros/rosdep/sources.list.d/20-default.list; then
         echo "ABORT: /etc/ros/rosdep/sources.list.d/20-default.list doesn't point to $f.yaml in $path_to_ros_rosdistro"
+        echo "Expected: yaml file://$path_to_ros_rosdistro/rosdep/$f.yaml"
         abort=true
     fi
 done
