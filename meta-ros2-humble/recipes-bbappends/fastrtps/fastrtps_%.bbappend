@@ -7,6 +7,17 @@ do_install:append() {
 FILES:${PN}-dev += " \
     ${libdir}/*.so \
 "
+# Setting the results from a test program on the target
+EXTRA_OECMAKE:append = " \
+    -DSM_RUN_RESULT="PTHREAD_RWLOCK_PREFER_READER_NP" \
+    -DSM_RUN_RESULT__TRYRUN_OUTPUT="PTHREAD_RWLOCK_PREFER_READER_NP" \
+"
+
+# fixes for host injection through tinyxml2
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+SRC_URI:append = " \
+    file://0001-CMakeLists.txt-fixing-host-injection.patch \
+"
 
 
 # Copyright (c) 2019-2021 LG Electronics, Inc.
