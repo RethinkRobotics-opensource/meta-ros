@@ -7,8 +7,3 @@ ROS_BUILD_DEPENDS:append = " \
     rosidl-generator-c \
     rosidl-generator-cpp \
 "
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-SRC_URI:append = " \
-    file://0001-Serialization.cpp-added-missing-include.patch \
-"
