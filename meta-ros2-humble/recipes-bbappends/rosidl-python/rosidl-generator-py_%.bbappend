@@ -12,9 +12,10 @@ ROS_EXPORT_DEPENDS += " \
 
 DEPENDS:remove = " \
     python3-native \
+    python3-numpy-native \
 "
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI:append = " \
-    file://0001-cmake-replaced-old-cmake-python-code-with-newer-one.patch \
+     file://0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch \
 "
