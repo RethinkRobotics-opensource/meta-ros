@@ -15,7 +15,7 @@ DEPENDS = " \
 "
 
 FILES:${PN} += " \
-    /usr/lib/python3.11/dist-packages/PyKDL.so \
+    /usr/lib/${PYTHON_DIR}/dist-packages/PyKDL.so \
 "
 
 inherit cmake python3native
