@@ -1,0 +1,29 @@
+From de3f276d0b3037c920992109fc9a5d6ce93e7b9d Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 16 Oct 2023 19:24:46 +0200
+Subject: [PATCH] Added missing cstdint
+
+This patch has already been applied upstream. Just not for humble.
+
+Upstream-Status: applied
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ include/rcpputils/filesystem_helper.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/rcpputils/filesystem_helper.hpp b/include/rcpputils/filesystem_helper.hpp
+index 9fd1090..7fe5c27 100644
+--- a/include/rcpputils/filesystem_helper.hpp
++++ b/include/rcpputils/filesystem_helper.hpp
+@@ -41,6 +41,7 @@
+ 
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ #include "rcpputils/visibility_control.hpp"
+ 
+-- 
+2.41.0
+
