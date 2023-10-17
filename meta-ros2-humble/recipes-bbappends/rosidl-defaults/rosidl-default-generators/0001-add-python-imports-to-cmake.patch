@@ -1,0 +1,31 @@
+From e157869ddc7a66b668dacd168143a612faaa7901 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Fri, 13 Oct 2023 17:21:49 +0200
+Subject: [PATCH] add python imports to cmake
+
+Instead of importing paths from the build, we rely on targets
+Python3::Python and Python3::NumPy in rosidl-generator-py. We
+therefore need to include a
+`find_package(Python3 COMPONENTS NumPy Development)`
+at some point.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ rosidl_default_generators-extras.cmake.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/rosidl_default_generators-extras.cmake.in b/rosidl_default_generators-extras.cmake.in
+index f13036f..479e9a5 100644
+--- a/rosidl_default_generators-extras.cmake.in
++++ b/rosidl_default_generators-extras.cmake.in
+@@ -2,6 +2,7 @@
+ # rosidl_default_generators/rosidl_default_generators-extras.cmake.in
+ 
+ find_package(ament_cmake_core REQUIRED)
++find_package(Python3 REQUIRED COMPONENTS Development NumPy)
+ ament_index_get_resources(rosidl_typesupport_c_packages "rosidl_typesupport_c")
+ ament_index_get_resources(rosidl_typesupport_cpp_packages "rosidl_typesupport_cpp")
+ ament_index_get_resources(rosidl_generator_packages "rosidl_generator_packages")
+-- 
+2.41.0
+
