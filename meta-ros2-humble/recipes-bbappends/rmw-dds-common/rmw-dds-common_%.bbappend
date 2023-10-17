@@ -1,3 +1,9 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI:append = " \
+    file://0001-CMakeLists.txt-added-rosidl_default_generators-to-de.patch \
+"
+
 ROS_BUILD_DEPENDS += " \
     python3-numpy \
     rosidl-typesupport-c \
@@ -9,6 +15,6 @@ ROS_BUILD_DEPENDS += " \
     rosidl-default-generators \
 "
 
-DEPENDS:remove = " \
-    python3-numpy-native \
+RDEPENDS:${PN}:append = " \
+    python3-numpy \
 "

@@ -1,0 +1,25 @@
+From d382b40bf8494bf2d933f74575fe6024a21cc090 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Fri, 13 Oct 2023 18:04:13 +0200
+Subject: [PATCH] CMakeLists.txt: added rosidl_default_generators to deps
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fc68a93..4314075 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,6 +21,7 @@ ament_export_dependencies(ament_cmake_core)
+ ament_export_dependencies(rcpputils)
+ ament_export_dependencies(rcutils)
+ ament_export_dependencies(rmw)
++ament_export_dependencies(rosidl_default_generators)
+ 
+ rosidl_generate_interfaces(
+   ${PROJECT_NAME}
+-- 
+2.41.0
+
