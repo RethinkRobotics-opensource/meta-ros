@@ -21,7 +21,7 @@ index 1407080..711efcf 100644
      message(FATAL_ERROR "Could NOT find required library LibM")
    endif()
 -  target_link_libraries(ccd "${LIBM_LIBRARY}")
-+  target_link_libraries(ccd PUBLIC m)
++  target_link_libraries(ccd PRIVATE m)
    if(BUILD_SHARED_LIBS)
      set(CCD_PKGCONFIG_EXTRA_LIBS -lm PARENT_SCOPE)
    endif()

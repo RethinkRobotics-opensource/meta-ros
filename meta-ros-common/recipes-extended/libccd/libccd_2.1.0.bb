@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/danfis/libccd;${ROS_BRANCH};protocol=https \
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release -DCCD_DOUBLE=1"
+EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release -DCCD_DOUBLE=1 -DBUILD_TESTING=OFF"
 
 inherit pkgconfig cmake
 
