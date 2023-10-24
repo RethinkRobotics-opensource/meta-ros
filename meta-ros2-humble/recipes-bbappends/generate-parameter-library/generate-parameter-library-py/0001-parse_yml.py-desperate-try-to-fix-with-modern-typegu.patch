@@ -1,0 +1,65 @@
+From 3753b283bba22eb2659055c55d37588bd97f5d13 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 18 Oct 2023 13:52:08 +0200
+Subject: [PATCH] parse_yml.py: desperate try to fix with modern typeguard
+
+The error is:
+
+Traceback (most recent call last):
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/bin/generate_parameter_library_cpp", line 8, in <module>
+|     sys.exit(main())
+|              ^^^^^^
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/generate_cpp_header.py", line 66, in main
+|     run(output_file, yaml_file, validate_header)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/generate_cpp_header.py", line 45, in run
+|     gen_param_struct.parse(yaml_file, validate_header)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/parse_yaml.py", line 733, in parse
+|     self.parse_dict(self.namespace, doc[self.namespace], [])
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/parse_yaml.py", line 831, in parse_dict
+|     self.parse_dict(key, root_map[key], nested_name)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/parse_yaml.py", line 837, in parse_dict
+|     self.parse_params(name, root_map, nested_name)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/parse_yaml.py", line 741, in parse_params
+|     ) = preprocess_inputs(self.language, name, value, nested_name_list)
+|         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/parse_yaml.py", line 677, in preprocess_inputs
+|     validations.append(ValidationFunction(func_name, args, code_gen_variable))
+|                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/generate_parameter_library_py/parse_yaml.py", line 310, in __init__
+|     def __init__(
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/typeguard/_functions.py", line 113, in check_argument_types
+|     check_type_internal(value, expected_type, memo=memo)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/typeguard/_checkers.py", line 676, in check_type_internal
+|     checker(value, origin_type, args, memo)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/typeguard/_checkers.py", line 377, in check_union
+|     check_type_internal(value, type_, memo)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/typeguard/_checkers.py", line 676, in check_type_internal
+|     checker(value, origin_type, args, memo)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/typeguard/_checkers.py", line 273, in check_list
+|     check_type_internal(v, args[0], memo)
+|   File "/home/mschoepf/yocto/conga/build/tmp/work/whiskey-64-rethink-linux/moveit-core/2.5.5-1-r0/recipe-sysroot-native/usr/lib/python3.11/site-packages/typeguard/_checkers.py", line 679, in check_type_internal
+|     if not isinstance(value, origin_type):
+|            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+| TypeError: isinstance() arg 2 must be a type, a tuple of types, or a union
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ generate_parameter_library_py/parse_yaml.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/generate_parameter_library_py/parse_yaml.py b/generate_parameter_library_py/parse_yaml.py
+index 7ae898a..4ee7f75 100644
+--- a/generate_parameter_library_py/parse_yaml.py
++++ b/generate_parameter_library_py/parse_yaml.py
+@@ -310,7 +310,7 @@ class ValidationFunction:
+     def __init__(
+         self,
+         function_name: str,
+-        arguments: Optional[List[any]],
++        arguments: Optional[List[Any]],
+         code_gen_variable: CodeGenVariableBase,
+     ):
+         self.code_gen_variable = code_gen_variable
+-- 
+2.41.0
+
