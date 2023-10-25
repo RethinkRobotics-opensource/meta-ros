@@ -1,0 +1,30 @@
+From 01a8b4a5f0ba56bfc21f565fa381ab87eac4ec0c Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 25 Oct 2023 19:31:53 +0200
+Subject: [PATCH] CMakeLists.txt: pull in rosidl-default-generators
+
+Add rosidl-default-generators as an ament dependency, then the
+hacks towards python3-numpy are working and require by far less
+bbappends
+
+Upstream-Status: inappropriate [oe-specific]
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 23741d57..a2f0f24c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -20,5 +20,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
+ )
+ 
+ ament_export_dependencies(rosidl_default_runtime)
++ament_export_dependencies(rosidl_default_generators)
+ 
+ ament_package()
+-- 
+2.41.0
+
