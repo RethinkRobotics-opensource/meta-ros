@@ -1,4 +1,4 @@
-From b081d5ecf4de116c410d833b418f70c34e7d0703 Mon Sep 17 00:00:00 2001
+From 018de0742e40a4f586ace9c77d3b2c205bf3ed89 Mon Sep 17 00:00:00 2001
 From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
 Date: Wed, 8 Mar 2023 13:18:28 +0100
 Subject: [PATCH] CMakeLists.txt: fixing relocatable package issue
@@ -14,7 +14,7 @@ Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
  1 file changed, 23 insertions(+), 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 63c1563..1dfde0b 100644
+index 63c1563..738e993 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -13,9 +13,28 @@ endif()
@@ -30,13 +30,13 @@ index 63c1563..1dfde0b 100644
 +  include/${PROJECT_NAME}/eigen_stl_vector_container.h
 +)
 +
-+ament_target_dependencies(${PROJECT_NAME} Eigen3)
-+ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
++target_link_libraries(${PROJECT_NAME} INTERFACE Eigen3::Eigen)
++ament_export_targets(${PROJECT_NAME}Targets)
 +ament_export_dependencies(Eigen3)
 +
 +install(
-+  DIRECTORY include/
-+  DESTINATION include
++  DIRECTORY include/${PROJECT_NAME}/
++  DESTINATION include/${PROJECT_NAME}
 +)
 +
 +install(
@@ -51,5 +51,5 @@ index 63c1563..1dfde0b 100644
 -ament_export_include_directories(include ${EIGEN3_INCLUDE_DIRS})
  ament_package()
 -- 
-2.39.2
+2.34.1
 
