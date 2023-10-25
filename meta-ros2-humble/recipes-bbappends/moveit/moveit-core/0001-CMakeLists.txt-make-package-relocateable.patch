@@ -1,0 +1,521 @@
+From c193421ad233ce3fb5f6074e2211e60afa660ae7 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 25 Oct 2023 19:37:24 +0200
+Subject: [PATCH] CMakeLists.txt: make package relocateable
+
+Without these fixes, the resulting cmake Exports will hold quite
+some wrong paths that will hurt us later down the build.
+
+Mostly affects fcl, octomap and boost includes.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt                            | 19 +-----
+ collision_detection/CMakeLists.txt        | 21 ++++---
+ collision_detection_bullet/CMakeLists.txt | 71 ++++++++++++++---------
+ collision_detection_fcl/CMakeLists.txt    | 10 +++-
+ collision_distance_field/CMakeLists.txt   | 16 +++--
+ distance_field/CMakeLists.txt             | 18 +++---
+ exceptions/CMakeLists.txt                 | 11 ++--
+ kinematics_base/CMakeLists.txt            |  1 +
+ planning_scene/CMakeLists.txt             | 19 +++---
+ robot_model/CMakeLists.txt                | 20 +++----
+ robot_state/CMakeLists.txt                | 14 ++---
+ trajectory_processing/CMakeLists.txt      | 17 +++---
+ transforms/CMakeLists.txt                 | 17 +++---
+ utils/CMakeLists.txt                      | 25 ++++----
+ 14 files changed, 147 insertions(+), 132 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bffe5d9ba..8972747eb 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,19 +7,8 @@ moveit_package()
+ 
+ find_package(ament_cmake REQUIRED)
+ find_package(rclcpp REQUIRED)
+-find_package(eigen3_cmake_module REQUIRED)
+-find_package(Eigen3 REQUIRED)
+-
+-find_package(PkgConfig REQUIRED)
+-pkg_check_modules(LIBFCL REQUIRED "fcl>=0.5.0")
+-# replace LIBFCL_LIBRARIES with full paths to the libraries
+-set(LIBFCL_LIBRARIES_FULL "")
+-foreach(LIBFCL_LIBRARY ${LIBFCL_LIBRARIES})
+-  find_library(${LIBFCL_LIBRARY}_LIB ${LIBFCL_LIBRARY} ${LIBFCL_LIBRARY_DIRS})
+-  list(APPEND LIBFCL_LIBRARIES_FULL ${${LIBFCL_LIBRARY}_LIB})
+-endforeach()
+-set(LIBFCL_LIBRARIES "${LIBFCL_LIBRARIES_FULL}")
+-
++find_package(Eigen3 REQUIRED NO_MODULE)
++find_package(fcl REQUIRED)
+ find_package(Bullet 2.87 REQUIRED)
+ find_package(angles REQUIRED)
+ find_package(OCTOMAP REQUIRED)
+@@ -110,10 +99,6 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
+   ruckig
+ )
+ 
+-include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS}
+-  ${LIBFCL_INCLUDE_DIRS}
+-)
+-
+ include_directories(${THIS_PACKAGE_INCLUDE_DIRS}
+                     ${VERSION_FILE_PATH})
+ 
+diff --git a/collision_detection/CMakeLists.txt b/collision_detection/CMakeLists.txt
+index 60ae3c713..3929d5600 100644
+--- a/collision_detection/CMakeLists.txt
++++ b/collision_detection/CMakeLists.txt
+@@ -15,19 +15,18 @@ include(GenerateExportHeader)
+ generate_export_header(${MOVEIT_LIB_NAME})
+ target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> $<TARGET_PROPERTY:moveit_planning_scene,INCLUDE_DIRECTORIES>)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  rclcpp
+-  rmw_implementation
+-  urdf
+-  urdfdom
+-  urdfdom_headers
+-  visualization_msgs
+-  tf2_eigen
+-  geometric_shapes
+-  OCTOMAP
+-)
+ 
+ target_link_libraries(${MOVEIT_LIB_NAME}
++  rclcpp::rclcpp
++  rmw_implementation::rmw_implementation
++  urdf::urdf
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  ${visualization_msgs_TARGETS}
++  tf2_eigen::tf2_eigen
++  geometric_shapes::geometric_shapes
++  octomap
++  octomath
+   moveit_robot_state
+ )
+ 
+diff --git a/collision_detection_bullet/CMakeLists.txt b/collision_detection_bullet/CMakeLists.txt
+index c7f7a41c7..4a16dd9cc 100644
+--- a/collision_detection_bullet/CMakeLists.txt
++++ b/collision_detection_bullet/CMakeLists.txt
+@@ -11,42 +11,59 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+ )
+ include(GenerateExportHeader)
+ generate_export_header(${MOVEIT_LIB_NAME})
+-target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
++target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}> $<BUILD_INTERFACE:${BULLET_INCLUDE_DIR}>)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME} SYSTEM
+-  BULLET
+-)
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  rclcpp
+-  rmw_implementation
+-  urdf
+-  urdfdom
+-  urdfdom_headers
+-  visualization_msgs
+-  octomap_msgs
++
++target_include_directories (${MOVEIT_LIB_NAME} PUBLIC
++  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
++  $<BUILD_INTERFACE:${BULLET_INCLUDE_DIR}>
++  $<INSTALL_INTERFACE:include>
+ )
+-target_link_libraries(${MOVEIT_LIB_NAME}
++
++target_compile_definitions(${MOVEIT_LIB_NAME} PUBLIC BT_USE_DOUBLE_PRECISION)
++
++
++target_link_libraries(${MOVEIT_LIB_NAME} PUBLIC
+   moveit_collision_detection
++  rmw_implementation::rmw_implementation
++  urdf::urdf
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  ${visualization_msgs_TARGETS}
++  ${octomap_msgs_TARGETS}
++  moveit_collision_detection
++  Eigen3::Eigen
++  BulletDynamics
++  BulletInverseDynamics
++  GIMPACTUtils
++  BulletWorldImporter
++  BulletCollision
++  LinearMath
+ )
+ 
+ add_library(collision_detector_bullet_plugin SHARED src/collision_detector_bullet_plugin_loader.cpp)
+ set_target_properties(collision_detector_bullet_plugin PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(collision_detector_bullet_plugin SYSTEM
+-  BULLET
+-)
+-ament_target_dependencies(collision_detector_bullet_plugin
+-  rclcpp
+-  urdf
+-  visualization_msgs
+-  pluginlib
+-  rmw_implementation
+-  octomap_msgs
+-)
+-target_link_libraries(collision_detector_bullet_plugin
+-  ${MOVEIT_LIB_NAME}
+-  moveit_planning_scene
++
++target_link_libraries(collision_detector_bullet_plugin PUBLIC
++   rclcpp::rclcpp
++   urdf::urdf
++   ${visualization_msgs_TAGETS}
++   pluginlib::pluginlib
++   rmw_implementation::rmw_implementation
++   ${octomap_msgs_TARGETS}
++   ${MOVEIT_LIB_NAME}
++   moveit_planning_scene
++   BulletDynamics
++   BulletInverseDynamics
++   GIMPACTUtils
++   BulletWorldImporter
++   BulletCollision
++   LinearMath
++   Eigen3::Eigen
+ )
+ 
++ament_export_dependencies(BULLET)
++
+ install(DIRECTORY include/ DESTINATION include/moveit_core)
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/moveit_collision_detection_bullet_export.h DESTINATION include/moveit_core)
+ 
+diff --git a/collision_detection_fcl/CMakeLists.txt b/collision_detection_fcl/CMakeLists.txt
+index 382dc41c7..4605683aa 100644
+--- a/collision_detection_fcl/CMakeLists.txt
++++ b/collision_detection_fcl/CMakeLists.txt
+@@ -6,7 +6,10 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+ )
+ include(GenerateExportHeader)
+ generate_export_header(${MOVEIT_LIB_NAME})
+-target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
++target_include_directories(${MOVEIT_LIB_NAME} PUBLIC
++  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
++  $<INSTALL_INTERFACE:include>
++)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+ ament_target_dependencies(${MOVEIT_LIB_NAME}
+   rclcpp
+@@ -14,11 +17,12 @@ ament_target_dependencies(${MOVEIT_LIB_NAME}
+   urdf
+   urdfdom
+   urdfdom_headers
+-  LIBFCL
+   visualization_msgs
+ )
+ target_link_libraries(${MOVEIT_LIB_NAME}
+   moveit_collision_detection
++  Eigen3::Eigen
++  fcl
+ )
+ 
+ add_library(collision_detector_fcl_plugin SHARED src/collision_detector_fcl_plugin_loader.cpp)
+@@ -33,6 +37,8 @@ ament_target_dependencies(collision_detector_fcl_plugin
+ target_link_libraries(collision_detector_fcl_plugin
+   ${MOVEIT_LIB_NAME}
+   moveit_planning_scene
++  Eigen3::Eigen
++  fcl
+ )
+ 
+ install(DIRECTORY include/ DESTINATION include)
+diff --git a/collision_distance_field/CMakeLists.txt b/collision_distance_field/CMakeLists.txt
+index fd0dae019..ac10af51d 100644
+--- a/collision_distance_field/CMakeLists.txt
++++ b/collision_distance_field/CMakeLists.txt
+@@ -11,15 +11,13 @@ generate_export_header(${MOVEIT_LIB_NAME})
+ target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+ 
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  urdf
+-  visualization_msgs
+-  tf2_eigen
+-  geometric_shapes
+-  OCTOMAP
+-)
+-
+-target_link_libraries(${MOVEIT_LIB_NAME}
++target_link_libraries(${MOVEIT_LIB_NAME} PUBLIC
++  urdf::urdf
++  ${visualization_msgs_TARGET}
++  tf2_eigen::tf2_eigen
++  octomap
++  octomath
++  geometric_shapes::geometric_shapes
+   moveit_planning_scene
+   moveit_distance_field
+   moveit_collision_detection
+diff --git a/distance_field/CMakeLists.txt b/distance_field/CMakeLists.txt
+index 0f4e5dd71..7046da20a 100644
+--- a/distance_field/CMakeLists.txt
++++ b/distance_field/CMakeLists.txt
+@@ -7,14 +7,16 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+ )
+ 
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  Boost
+-  urdfdom
+-  urdfdom_headers
+-  visualization_msgs
+-  geometric_shapes
+-  tf2_eigen
+-  OCTOMAP
++
++target_link_libraries(${MOVEIT_LIB_NAME} PUBLIC
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  ${visualization_msgs_TARGETS}
++  geometric_shapes::geometric_shapes
++  tf2_eigen::tf2_eigen
++  octomap
++  Boost::boost
++  Boost::iostreams
+ )
+ 
+ install(DIRECTORY include/ DESTINATION include)
+diff --git a/exceptions/CMakeLists.txt b/exceptions/CMakeLists.txt
+index 2976afd3f..7b1b3a73b 100644
+--- a/exceptions/CMakeLists.txt
++++ b/exceptions/CMakeLists.txt
+@@ -2,11 +2,10 @@ set(MOVEIT_LIB_NAME moveit_exceptions)
+ 
+ add_library(${MOVEIT_LIB_NAME} SHARED src/exceptions.cpp)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  Boost
+-  rclcpp
+-  urdfdom
+-  urdfdom_headers
++target_link_libraries(${MOVEIT_LIB_NAME}
++  Boost::boost
++  rclcpp::rclcpp
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
+ )
+-
+ install(DIRECTORY include/ DESTINATION include)
+diff --git a/kinematics_base/CMakeLists.txt b/kinematics_base/CMakeLists.txt
+index e158b48d0..70680c913 100644
+--- a/kinematics_base/CMakeLists.txt
++++ b/kinematics_base/CMakeLists.txt
+@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.22)
+ set(MOVEIT_LIB_NAME moveit_kinematics_base)
+ 
+ add_library(${MOVEIT_LIB_NAME} SHARED src/kinematics_base.cpp)
++set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+ include(GenerateExportHeader)
+ generate_export_header(${MOVEIT_LIB_NAME})
+ target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)  # for this library
+diff --git a/planning_scene/CMakeLists.txt b/planning_scene/CMakeLists.txt
+index 370d0a298..113aa95b3 100644
+--- a/planning_scene/CMakeLists.txt
++++ b/planning_scene/CMakeLists.txt
+@@ -6,16 +6,18 @@ generate_export_header(${MOVEIT_LIB_NAME})
+ target_include_directories(${MOVEIT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
+ #TODO: Fix the versioning
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  Boost
+-  rclcpp
+-  urdfdom
+-  urdfdom_headers
+-  octomap_msgs
+-  OCTOMAP
+-)
+ 
+ target_link_libraries(${MOVEIT_LIB_NAME}
++  rclcpp::rclcpp
++  rmw_implementation::rmw_implementation
++  urdf::urdf
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  ${visualization_msgs_TARGETS}
++  tf2_eigen::tf2_eigen
++  geometric_shapes::geometric_shapes
++  octomap
++  octomath
+   moveit_robot_model
+   moveit_robot_state
+   moveit_exceptions
+@@ -26,6 +28,7 @@ target_link_libraries(${MOVEIT_LIB_NAME}
+   moveit_robot_trajectory
+   moveit_trajectory_processing
+   moveit_utils
++  Eigen3::Eigen
+ )
+ 
+ install(DIRECTORY include/ DESTINATION include)
+diff --git a/robot_model/CMakeLists.txt b/robot_model/CMakeLists.txt
+index b6b69b880..d90ecd1ff 100644
+--- a/robot_model/CMakeLists.txt
++++ b/robot_model/CMakeLists.txt
+@@ -14,17 +14,17 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+   src/robot_model.cpp
+ )
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  angles
+-  moveit_msgs
+-  Eigen3
+-  geometric_shapes
+-  urdf
+-  urdfdom_headers
+-  srdfdom
+-  visualization_msgs
+-)
++
+ target_link_libraries(${MOVEIT_LIB_NAME}
++  angles::angles
++  ${moveit_msgs_TARGETS}
++  Eigen3::Eigen
++  geometric_shapes::geometric_shapes
++  urdf::urdf
++  urdfdom_headers::urdfdom_headers
++  srdfdom::srdfdom
++  ${visualization_msgs_TARGETS}
++  random_numbers
+   moveit_exceptions
+   moveit_kinematics_base
+ )
+diff --git a/robot_state/CMakeLists.txt b/robot_state/CMakeLists.txt
+index e2c942e3c..3ffc066a6 100644
+--- a/robot_state/CMakeLists.txt
++++ b/robot_state/CMakeLists.txt
+@@ -7,17 +7,17 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+   src/cartesian_interpolator.cpp
+ )
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  urdf
+-  tf2_geometry_msgs
+-  geometric_shapes
+-  urdfdom_headers
+-  Boost
+-)
++
+ target_link_libraries(${MOVEIT_LIB_NAME}
++  urdf::urdf
++  ${tf2_geometry_msgs_TARGETS}
++  geometric_shapes::geometric_shapes
++  urdfdom_headers::urdfdom_headers
++  Boost::boost
+   moveit_robot_model
+   moveit_kinematics_base
+   moveit_transforms
++  Eigen3::Eigen
+ )
+ 
+ install(DIRECTORY include/ DESTINATION include)
+diff --git a/trajectory_processing/CMakeLists.txt b/trajectory_processing/CMakeLists.txt
+index 996110104..0c813fbd6 100644
+--- a/trajectory_processing/CMakeLists.txt
++++ b/trajectory_processing/CMakeLists.txt
+@@ -9,16 +9,15 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+ )
+ 
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  rclcpp
+-  rmw_implementation
+-  urdf
+-  urdfdom
+-  urdfdom_headers
+-  visualization_msgs
+-  Boost
+-)
++
+ target_link_libraries(${MOVEIT_LIB_NAME}
++  rclcpp::rclcpp
++  rmw_implementation::rmw_implementation
++  urdf::urdf
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  ${visualization_msgs_TARGETS}
++  Boost::boost
+   moveit_robot_state
+   moveit_robot_trajectory
+   ruckig::ruckig
+diff --git a/transforms/CMakeLists.txt b/transforms/CMakeLists.txt
+index 028c9fee6..69c4a368c 100644
+--- a/transforms/CMakeLists.txt
++++ b/transforms/CMakeLists.txt
+@@ -2,14 +2,15 @@ set(MOVEIT_LIB_NAME moveit_transforms)
+ 
+ add_library(${MOVEIT_LIB_NAME} SHARED src/transforms.cpp)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  geometric_shapes
+-  tf2_eigen
+-  rclcpp
+-  rmw_implementation
+-  urdfdom
+-  urdfdom_headers
+-  Boost
++
++target_link_libraries(${MOVEIT_LIB_NAME}
++  geometric_shapes::geometric_shapes
++  tf2_eigen::tf2_eigen
++  rclcpp::rclcpp
++  rmw_implementation::rmw_implementation
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  Boost::boost
+ )
+ 
+ install(DIRECTORY include/ DESTINATION include)
+diff --git a/utils/CMakeLists.txt b/utils/CMakeLists.txt
+index f94540da3..402432fed 100644
+--- a/utils/CMakeLists.txt
++++ b/utils/CMakeLists.txt
+@@ -5,23 +5,28 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+   src/message_checks.cpp
+   src/rclcpp_utils.cpp
+ )
+-ament_target_dependencies(${MOVEIT_LIB_NAME} Boost moveit_msgs)
+ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+ 
++target_link_libraries(${MOVEIT_LIB_NAME} PUBLIC
++  Boost::boost
++  ${moveit_msgs_TARGETS}
++)
++
+ install(DIRECTORY include/ DESTINATION include)
+ 
+ 
+ find_package(ament_index_cpp REQUIRED)
+ set(MOVEIT_TEST_LIB_NAME moveit_test_utils)
+ add_library(${MOVEIT_TEST_LIB_NAME} SHARED src/robot_model_test_utils.cpp)
+-target_link_libraries(${MOVEIT_TEST_LIB_NAME} moveit_robot_model)
+-ament_target_dependencies(${MOVEIT_TEST_LIB_NAME}
+-  ament_index_cpp
+-  Boost
+-  geometry_msgs
+-  urdf
+-  srdfdom
+-  urdfdom
+-  urdfdom_headers
++target_link_libraries(${MOVEIT_TEST_LIB_NAME}
++  ament_index_cpp::ament_index_cpp
++  Boost::boost
++  ${geometry_msgs_TARGETS}
++  urdf::urdf
++  srdfdom::srdfdom
++  urdfdom::urdf_parser
++  urdfdom_headers::urdfdom_headers
++  moveit_robot_model
+ )
++
+ set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+-- 
+2.41.0
+
