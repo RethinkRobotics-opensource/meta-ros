@@ -1,0 +1,31 @@
+From 0b98e07059bcdf5254899afdf884048d7136e350 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 25 Oct 2023 19:43:27 +0200
+Subject: [PATCH] CMakeLists.txt: removing idiot Werror
+
+Some moron added Werror to the build, which, surprise surprise, breaks
+when using more modern compiler or more modern dependencies.
+
+Thanks for nothing, asshole.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 90d7c9d..42ec308 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,7 +11,7 @@ find_package(tcb_span REQUIRED)
+ find_package(tl_expected REQUIRED)
+ 
+ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
+-    add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wold-style-cast)
++    add_compile_options(-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wold-style-cast)
+ endif()
+ 
+ add_library(rsl
+-- 
+2.41.0
+
