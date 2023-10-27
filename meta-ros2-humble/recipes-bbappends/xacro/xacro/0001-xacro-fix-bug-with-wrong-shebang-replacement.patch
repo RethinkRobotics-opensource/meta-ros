@@ -1,0 +1,28 @@
+From 88e3617e05f652c02cb28a1526341cd5a4f91492 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Fri, 27 Oct 2023 13:35:03 +0200
+Subject: [PATCH] xacro: fix bug with wrong shebang replacement
+
+"easy_install" will try to guess the shebang which goes
+wrong of course. Fixing this in the setup.cfg
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ setup.cfg | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/setup.cfg b/setup.cfg
+index efc71ad..a179cef 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -1,3 +1,6 @@
+ [options.entry_points]
+ console_scripts =
+     xacro = xacro:main
++
++[build]
++executable = /usr/bin/env python3
+\ No newline at end of file
+-- 
+2.34.1
+
