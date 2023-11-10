@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b441202ba2d6b14d62026cb18bb960ed"
 
 ROS_BPN = "urdfdom"
 
-SRC_URI = "https://salsa.debian.org/science-team/urdfdom/-/archive/debian/${PV}/urdfdom-debian-${PV}.tar.gz"
+SRC_URI = "https://salsa.debian.org/science-team/urdfdom/-/archive/debian/${PV}/urdfdom-debian-${PV}.tar.gz \
+           file://0001-CMakeLists.txt-Random-fixed-regarding-TMPDIR.patch \
+           "
 SRC_URI[md5sum] = "22983da597aae07ae1c99bafa4b62869"
 SRC_URI[sha256sum] = "8480c81da21fc2ef5a0d40e096184dd4bbdb8f28df5f44707e21c26d7e176284"
 S = "${WORKDIR}/urdfdom-debian-${PV}"
@@ -33,6 +35,3 @@ FILES:${PN}-dev:prepend = " \
 inherit cmake
 # This recipe is generated for ROS 2 distros.
 inherit ros_recipe_now_generated
-
-# *.cmake files have hardcoded sysroot-s in them.
-SSTATE_SCAN_FILES:append = " *.cmake"
