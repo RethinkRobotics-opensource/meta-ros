@@ -1,4 +1,4 @@
-From 139ad7e37ddb977ce06fdd213814c75024382c8e Mon Sep 17 00:00:00 2001
+From fce6f102c14e4ad6b437136200d5561d2ddbc81d Mon Sep 17 00:00:00 2001
 From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
 Date: Fri, 22 Sep 2023 18:31:27 +0200
 Subject: [PATCH] rosidl_generator_py_generate_interfaces: use cmake targets
@@ -6,30 +6,25 @@ Subject: [PATCH] rosidl_generator_py_generate_interfaces: use cmake targets
 Another approach to use cmake targets instead of old stlye variables
 that will leak host path into target.
 
+Tricky parts is the bug in cmake:
+https://gitlab.kitware.com/cmake/cmake/-/issues/25145
+which will let the Python3_SOABI variable be empty in certain cases.
+Fixing this with with a second find_package to Python 3 (mind the
+space).
+
 Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
 
-%% original patch: 0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch
-
-%% original patch: 0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch
-
-%% original patch: 0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch
-
-%% original patch: 0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch
-
-%% original patch: 0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch
-
-%% original patch: 0001-rosidl_generator_py_generate_interfaces-use-cmake-ta.patch
 ---
- ...idl_generator_py_generate_interfaces.cmake | 54 ++++++-------------
+ ...idl_generator_py_generate_interfaces.cmake | 56 ++++++-------------
  package.xml                                   |  1 -
  rosidl_generator_py-extras.cmake.in           |  1 +
- 3 files changed, 16 insertions(+), 40 deletions(-)
+ 3 files changed, 18 insertions(+), 40 deletions(-)
 
 diff --git a/cmake/rosidl_generator_py_generate_interfaces.cmake b/cmake/rosidl_generator_py_generate_interfaces.cmake
-index a6d8263..c00a8fd 100644
+index a6d8263..3081f97 100644
 --- a/cmake/rosidl_generator_py_generate_interfaces.cmake
 +++ b/cmake/rosidl_generator_py_generate_interfaces.cmake
-@@ -17,11 +17,8 @@ find_package(rosidl_runtime_c REQUIRED)
+@@ -17,11 +17,10 @@ find_package(rosidl_runtime_c REQUIRED)
  find_package(rosidl_typesupport_c REQUIRED)
  find_package(rosidl_typesupport_interface REQUIRED)
  
@@ -39,11 +34,13 @@ index a6d8263..c00a8fd 100644
 -find_package(PythonExtra MODULE REQUIRED)
 -
 +find_package(Python3 REQUIRED COMPONENTS Development NumPy)
-+message(WARNING "DEBUG DA FUCK: Python3_NumPy_FOUND = ${Python3_NumPy_FOUND} Python3_NumPy_INCLUDE_DIRS = ${Python3_NumPy_INCLUDE_DIRS} Python3_EXECUTABLE = ${Python3_EXECUTABLE} Python3_INCLUDE_DIRS = ${Python3_INCLUDE_DIRS}" )
++# This looks awkward, but is necessary due to cmake / kitware not wanting
++# to fix their Python_SOABI behavior. See https://gitlab.kitware.com/cmake/cmake/-/issues/25145
++find_package(Python 3 REQUIRED COMPONENTS Development)
  # Get a list of typesupport implementations from valid rmw implementations.
  rosidl_generator_py_get_typesupports(_typesupport_impls)
  
-@@ -126,7 +123,7 @@ endif()
+@@ -126,7 +125,7 @@ endif()
  
  set(_target_suffix "__py")
  
@@ -52,18 +49,18 @@ index a6d8263..c00a8fd 100644
  if(WIN32 AND "${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
    set(PYTHON_EXECUTABLE ${PYTHON_EXECUTABLE_DEBUG})
  endif()
-@@ -148,8 +145,8 @@ macro(set_properties _build_type)
+@@ -148,8 +147,8 @@ macro(set_properties _build_type)
      PREFIX ""
      LIBRARY_OUTPUT_DIRECTORY${_build_type} ${_output_path}
      RUNTIME_OUTPUT_DIRECTORY${_build_type} ${_output_path}
 -    OUTPUT_NAME "${PROJECT_NAME}_s__${_typesupport_impl}${PythonExtra_EXTENSION_SUFFIX}"
 -    SUFFIX "${PythonExtra_EXTENSION_EXTENSION}")
-+    OUTPUT_NAME "${PROJECT_NAME}_s__${_typesupport_impl}.${Python3_SOABI}"
-+    SUFFIX "${Python3_EXTENSION}")
++    OUTPUT_NAME "${PROJECT_NAME}_s__${_typesupport_impl}.${Python_SOABI}"
++    SUFFIX "${CMAKE_SHARED_LIBRARY_SUFFIX}")
  endmacro()
  
  macro(set_lib_properties _build_type)
-@@ -165,49 +162,29 @@ set(rosidl_generator_py_suffix "__rosidl_generator_py")
+@@ -165,49 +164,29 @@ set(rosidl_generator_py_suffix "__rosidl_generator_py")
  set(_target_name_lib "${rosidl_generate_interfaces_TARGET}${rosidl_generator_py_suffix}")
  add_library(${_target_name_lib} SHARED ${_generated_c_files})
  target_link_libraries(${_target_name_lib}
@@ -121,7 +118,7 @@ index a6d8263..c00a8fd 100644
  
  rosidl_get_typesupport_target(c_typesupport_target "${rosidl_generate_interfaces_TARGET}" "rosidl_typesupport_c")
  target_link_libraries(${_target_name_lib} ${c_typesupport_target})
-@@ -246,7 +223,8 @@ foreach(_typesupport_impl ${_typesupport_impls})
+@@ -246,7 +225,8 @@ foreach(_typesupport_impl ${_typesupport_impls})
    target_link_libraries(
      ${_target_name}
      ${_target_name_lib}
@@ -131,7 +128,7 @@ index a6d8263..c00a8fd 100644
      ${rosidl_generate_interfaces_TARGET}__${_typesupport_impl}
    )
  
-@@ -254,9 +232,7 @@ foreach(_typesupport_impl ${_typesupport_impls})
+@@ -254,9 +234,7 @@ foreach(_typesupport_impl ${_typesupport_impls})
      PUBLIC
      ${CMAKE_CURRENT_BINARY_DIR}/rosidl_generator_c
      ${CMAKE_CURRENT_BINARY_DIR}/rosidl_generator_py
@@ -164,5 +161,5 @@ index 80bed29..d80ac15 100644
  rosidl_generator_py_extras(
    "${rosidl_generator_py_DIR}/../../../lib/rosidl_generator_py/rosidl_generator_py"
 -- 
-2.41.0
+2.34.1
 
