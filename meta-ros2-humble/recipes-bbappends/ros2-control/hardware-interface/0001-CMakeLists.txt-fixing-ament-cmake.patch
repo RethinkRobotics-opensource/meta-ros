@@ -1,0 +1,130 @@
+From 6dfc1c956e84b2bca5f122e6bf5314988dea664f Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 20 Nov 2023 22:15:37 +0100
+Subject: [PATCH] CMakeLists.txt: fixing ament cmake
+
+Making ament to export proper targets (i.e.
+hardware_interface::hardware_interface) instead of host path _LIBRARIES
+and _INCLUDE_DIRS.
+
+Upstream-Status: Backport
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 56 +++++++++++++++++++++++++-------------------------
+ 1 file changed, 28 insertions(+), 28 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2fb31641b..855af3906 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -12,11 +12,11 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
+     rclcpp_lifecycle
+     rcpputils
+     rcutils
+-    tinyxml2_vendor
+-    TinyXML2
+ )
+ 
+ find_package(ament_cmake REQUIRED)
++find_package(PkgConfig REQUIRED)
++pkg_check_modules(libtinyxml2 REQUIRED IMPORTED_TARGET tinyxml2)
+ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
+   find_package(${Dependency} REQUIRED)
+ endforeach()
+@@ -33,9 +33,18 @@ add_library(
+ target_include_directories(
+   ${PROJECT_NAME}
+   PUBLIC
+-  include
++  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
++  "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
++
++target_link_libraries(${PROJECT_NAME} PUBLIC
++  ${control_msgs_TARGETS}
++  ${lifecycle_msgs_TARGETS}
++  pluginlib::pluginlib
++  rclcpp_lifecycle::rclcpp_lifecycle
++  rcpputils::rcpputils
++  rcutils::rcutils
++  PkgConfig::libtinyxml2
+ )
+-ament_target_dependencies(${PROJECT_NAME} ${THIS_PACKAGE_INCLUDE_DEPENDS})
+ # Causes the visibility macros to use dllexport rather than dllimport,
+ # which is appropriate when building the dll but not consuming it.
+ target_compile_definitions(${PROJECT_NAME} PRIVATE "HARDWARE_INTERFACE_BUILDING_DLL")
+@@ -49,18 +58,17 @@ add_library(
+ target_include_directories(
+   mock_components
+   PUBLIC
+-  include
+-)
++  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
++  "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
++
+ target_link_libraries(
+-  mock_components
+-  ${PROJECT_NAME}
+-)
+-ament_target_dependencies(
+-  mock_components
+-  pluginlib
+-  rcpputils
++ mock_components PUBLIC
++ ${PROJECT_NAME}
++ pluginlib::pluginlib
++ rcpputils::rcpputils
+ )
+ 
++
+ # Causes the visibility macros to use dllexport rather than dllimport,
+ # which is appropriate when building the dll but not consuming it.
+ target_compile_definitions(mock_components PRIVATE "HARDWARE_INTERFACE_BUILDING_DLL")
+@@ -78,16 +86,14 @@ add_library(
+ target_include_directories(
+   fake_components
+   PUBLIC
+-  include
++  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
++  "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
+ )
+ target_link_libraries(
+-  fake_components
++  fake_components PUBLIC
+   ${PROJECT_NAME}
+-)
+-ament_target_dependencies(
+-  fake_components
+-  pluginlib
+-  rcpputils
++  pluginlib::pluginlib
++  rcpputils::rcpputils
+ )
+ 
+ # Causes the visibility macros to use dllexport rather than dllimport,
+@@ -108,6 +114,7 @@ install(
+   fake_components
+   mock_components
+   ${PROJECT_NAME}
++  EXPORT export_${PROJECT_NAME}
+   RUNTIME DESTINATION bin
+   ARCHIVE DESTINATION lib
+   LIBRARY DESTINATION lib
+@@ -179,13 +186,6 @@ if(BUILD_TESTING)
+   )
+ endif()
+ 
+-ament_export_include_directories(
+-  include
+-)
+-ament_export_libraries(
+-  fake_components
+-  mock_components
+-  ${PROJECT_NAME}
+-)
++ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
+ ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
+ ament_package()
+-- 
+2.41.0
+

@@ -1,0 +1,56 @@
+From 7fefad6013336c5a4356645f72c03f319893af3d Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 20 Nov 2023 22:16:47 +0100
+Subject: [PATCH] CMakeLists.txt: fixing ament cmake
+
+Making ament to export proper targets (i.e.
+constroller_interface::controller_interface) instead of host path _LIBRARIES
+and _INCLUDE_DIRS.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4f28622bd..f363c6132 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -19,7 +19,8 @@ add_library(
+ target_include_directories(
+   ${PROJECT_NAME}
+   PRIVATE
+-  include
++  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
++  "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
+ )
+ ament_target_dependencies(
+   ${PROJECT_NAME}
+@@ -34,6 +35,7 @@ install(DIRECTORY include/
+   DESTINATION include
+ )
+ install(TARGETS ${PROJECT_NAME}
++  EXPORT export_${PROJECT_NAME}
+   ARCHIVE DESTINATION lib
+   LIBRARY DESTINATION lib
+   RUNTIME DESTINATION bin
+@@ -90,15 +92,10 @@ if(BUILD_TESTING)
+   )
+ endif()
+ 
++ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
+ ament_export_dependencies(
+   hardware_interface
+   rclcpp_lifecycle
+   sensor_msgs
+ )
+-ament_export_include_directories(
+-  include
+-)
+-ament_export_libraries(
+-  ${PROJECT_NAME}
+-)
+ ament_package()
+-- 
+2.41.0
+

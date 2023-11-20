@@ -1,0 +1,50 @@
+From f5640d2a9469118d4e120f4205035e924983bbbb Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 20 Nov 2023 12:38:57 +0100
+Subject: [PATCH] CMakeLists.txt / pkgconfig: fixing include
+
+Eigen3 is included in the pkg-config with the full path, which will
+leak TMPDIR into the .pc file. We try to guess the location relative
+to the install of orocos.pc.
+
+Upstream-Status: inappropriate (oe-specific)
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt   | 2 +-
+ orocos_kdl.pc.in | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1ee1756..ebafccc 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -54,7 +54,7 @@ if(NOT EIGEN3_FOUND)
+   include(${PROJ_SOURCE_DIR}/cmake/FindEigen3.cmake)
+ endif()
+ include_directories(${EIGEN3_INCLUDE_DIR})
+-SET(KDL_CFLAGS "${KDL_CFLAGS} -I${EIGEN3_INCLUDE_DIR}")
++SET(KDL_CFLAGS "${KDL_CFLAGS}")
+ 
+ # Check the platform STL containers capabilities
+ include(cmake/CheckSTLContainers.cmake)
+diff --git a/orocos_kdl.pc.in b/orocos_kdl.pc.in
+index 8a477e8..2dbbb84 100644
+--- a/orocos_kdl.pc.in
++++ b/orocos_kdl.pc.in
+@@ -1,10 +1,11 @@
+ prefix=${pcfiledir}/../..
+ libdir=${prefix}/lib@LIB_SUFFIX@
+ includedir=${prefix}/include
++eigenincludedir=${prefix}/include/eigen3
+ 
+ Name: orocos-kdl
+ Description: The Orocos Kinematics and Dynamics Library 
+ Requires: 
+ Version: @KDL_VERSION@
+ Libs: -L${libdir} -lorocos-kdl
+-Cflags: -I${includedir} @KDL_CFLAGS@
++Cflags: -I${includedir} -I${eigenincludedir} @KDL_CFLAGS@
+-- 
+2.41.0
+
