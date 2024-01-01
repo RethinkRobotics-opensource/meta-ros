@@ -1,0 +1,60 @@
+From 470272b1b16e6d5297f70b7f497977301da98277 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Thu, 28 Dec 2023 13:41:58 +0100
+Subject: [PATCH] Fixing includes with GCC 13.2
+
+context.hpp and logging_mutex.cpp are missing the include of
+stdexcept (using std::runtime_error)
+The error messages are:
+```
+logging_mutex.cpp:27:16: error: 'runtime_error' is not a member of 'std'
+```
+and
+```
+context.hpp:45:25: error: expected class-name before '{' token
+```
+
+Upstream-Status: backport
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ include/rclcpp/context.hpp   | 3 ++-
+ src/rclcpp/logging_mutex.cpp | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/include/rclcpp/context.hpp b/include/rclcpp/context.hpp
+index 2d8db29d..f277a970 100644
+--- a/include/rclcpp/context.hpp
++++ b/include/rclcpp/context.hpp
+@@ -20,6 +20,7 @@
+ #include <memory>
+ #include <mutex>
+ #include <string>
++#include <stdexcept>
+ #include <typeindex>
+ #include <typeinfo>
+ #include <unordered_map>
+@@ -42,7 +43,7 @@ class ContextAlreadyInitialized : public std::runtime_error
+ {
+ public:
+   ContextAlreadyInitialized()
+-  : std::runtime_error("context is already initialized") {}
++    : std::runtime_error("context is already initialized") {}
+ };
+ 
+ /// Forward declare WeakContextsWrapper
+diff --git a/src/rclcpp/logging_mutex.cpp b/src/rclcpp/logging_mutex.cpp
+index 308a21fe..bbbe9bbe 100644
+--- a/src/rclcpp/logging_mutex.cpp
++++ b/src/rclcpp/logging_mutex.cpp
+@@ -14,6 +14,7 @@
+ 
+ #include <memory>
+ #include <mutex>
++#include <stdexcept>
+ 
+ #include "rcutils/macros.h"
+ 
+-- 
+2.41.0
+

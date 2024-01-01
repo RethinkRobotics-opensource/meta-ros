@@ -1,0 +1,29 @@
+From 1a93b749c30c203c0d006a923ec765615a781be9 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 1 Jan 2024 19:01:42 +0100
+Subject: [PATCH] Fixing-missing-include
+
+Fix missing include of cstdint.
+
+Upstream-Status: backport
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ include/rosbag2_compression/compression_options.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/rosbag2_compression/compression_options.hpp b/include/rosbag2_compression/compression_options.hpp
+index 37fe5007e..191bb6d71 100644
+--- a/include/rosbag2_compression/compression_options.hpp
++++ b/include/rosbag2_compression/compression_options.hpp
+@@ -16,6 +16,7 @@
+ #define ROSBAG2_COMPRESSION__COMPRESSION_OPTIONS_HPP_
+ 
+ #include <string>
++#include <cstdint>
+ 
+ #include "visibility_control.hpp"
+ 
+-- 
+2.41.0
+

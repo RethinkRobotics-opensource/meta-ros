@@ -26,3 +26,4 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 SRC_URI += "git://github.com/skystrife/cpptoml.git;name=cpptoml;destsuffix=git/cpptoml-upstream;branch=master;protocol=https \
     file://0001-cpptoml-fetch-with-bitbake-fetcher-instead-of-Extern.patch \
 "
+SRCREV_FORMAT ?= "iceoryx-posh_git"

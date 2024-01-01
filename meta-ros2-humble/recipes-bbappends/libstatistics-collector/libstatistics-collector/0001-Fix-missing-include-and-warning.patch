@@ -1,0 +1,43 @@
+From 3789532cecf6d9191caa720d72ee1575064c8816 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 1 Jan 2024 19:06:44 +0100
+Subject: [PATCH] Fix-missing-include-and-warning
+
+Fix missing include of cstdint and making destructor virtual.
+
+Upstream-Status: backport
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ .../moving_average_statistics/moving_average.hpp                | 2 +-
+ .../libstatistics_collector/moving_average_statistics/types.hpp | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/include/libstatistics_collector/moving_average_statistics/moving_average.hpp b/include/libstatistics_collector/moving_average_statistics/moving_average.hpp
+index abcb900..9dd23aa 100644
+--- a/include/libstatistics_collector/moving_average_statistics/moving_average.hpp
++++ b/include/libstatistics_collector/moving_average_statistics/moving_average.hpp
+@@ -53,7 +53,7 @@ public:
+   MovingAverageStatistics() = default;
+ 
+   LIBSTATISTICS_COLLECTOR_PUBLIC
+-  ~MovingAverageStatistics() = default;
++  virtual ~MovingAverageStatistics() = default;
+ 
+   /**
+    *  Returns the arithmetic mean of all data recorded. If no observations have been made, returns NaN.
+diff --git a/include/libstatistics_collector/moving_average_statistics/types.hpp b/include/libstatistics_collector/moving_average_statistics/types.hpp
+index eb58531..c253f23 100644
+--- a/include/libstatistics_collector/moving_average_statistics/types.hpp
++++ b/include/libstatistics_collector/moving_average_statistics/types.hpp
+@@ -18,6 +18,7 @@
+ #include <cmath>
+ #include <sstream>
+ #include <string>
++#include <cstdint>
+ 
+ #include "libstatistics_collector/visibility_control.hpp"
+ 
+-- 
+2.41.0
+

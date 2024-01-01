@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://FMILIB_License.txt;md5=b954fd969bf924475e3253a714f6c0
                     file://ThirdParty/c99_snprintf/c99-snprintf_1.1/COPYING;md5=e2ecb921277c8b452f57e512f11ab78a \
                     file://ThirdParty/Expat/expat-2.4.8/COPYING;md5=9e2ce3b3c4c0f2670883a23bbd7c37a9"
 
-SRC_URI = "git://github.com/modelon-community/fmi-library.git;protocol=https \
+SRC_URI = "git://github.com/modelon-community/fmi-library.git;protocol=https;branch=master \
            file://0001-CMakeLists.txt-replacing-expat-with-system.patch \
            "
 
