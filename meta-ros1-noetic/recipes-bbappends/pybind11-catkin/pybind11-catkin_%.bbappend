@@ -18,3 +18,4 @@ SRCREV_pybind11-upstream = "014cd12ec1a3258f3bfc6597f371ed46c8e89ccd"
 # |   tools/pybind11Tools.cmake:16 (find_package)
 # |   CMakeLists.txt:33 (include)
 SRC_URI += "file://0001-pybind11-tools-FindPythonLibsNew.cmake-ignore-pointe.patch;patchdir=pybind11-upstream"
+SRCREV_FORMAT ?= "pybind11-catkin_git"

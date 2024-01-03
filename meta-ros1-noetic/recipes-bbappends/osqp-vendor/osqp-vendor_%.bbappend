@@ -26,3 +26,5 @@ SRCREV_qdldl = "7d16b70a10a152682204d745d814b6eb63dc5cd2"
 # Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
 # osqp-vendor: 9 installed and not shipped files. [installed-vs-shipped]
 FILES:${PN}-dev += "${ros_libdir}/cmake"
+
+SRCREV_FORMAT ?= "osqp-vendor_git"

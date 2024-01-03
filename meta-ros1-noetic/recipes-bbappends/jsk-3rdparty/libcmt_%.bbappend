@@ -17,3 +17,5 @@ SRCREV_libcmt-upstream = "e4d7ea42edafe13b1070ef4d595b2d6062d79d1a"
 do_install() {
     DESTDIR='${D}' VERBOSE=1 cmake --build '${B}/libcmt-prefix/src/libcmt-build/' --target ${OECMAKE_TARGET_INSTALL} -- ${EXTRA_OECMAKE_BUILD}
 }
+
+SRCREV_FORMAT ?= "libcmt_git"
