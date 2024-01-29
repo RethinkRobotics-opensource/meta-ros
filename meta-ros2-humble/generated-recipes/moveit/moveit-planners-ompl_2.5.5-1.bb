@@ -17,7 +17,7 @@ ROS_CN = "moveit"
 ROS_BPN = "moveit_planners_ompl"
 
 ROS_BUILD_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libomp-dev} \
+    ompl \
     moveit-common \
     moveit-core \
     moveit-msgs \
@@ -35,7 +35,7 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libomp-dev} \
+    ompl \
     moveit-common \
     moveit-core \
     moveit-msgs \
@@ -50,7 +50,7 @@ ROS_EXPORT_DEPENDS = " \
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libomp-dev} \
+    ompl \
     moveit-common \
     moveit-core \
     moveit-msgs \

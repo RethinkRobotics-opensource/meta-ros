@@ -17,7 +17,6 @@ ROS_CN = "ompl"
 ROS_BPN = "ompl"
 
 ROS_BUILD_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-opende} \
     boost \
     cmake \
     libeigen \
@@ -34,7 +33,6 @@ ROS_EXPORT_DEPENDS = ""
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-opende} \
     boost \
     libeigen \
     libflann \
