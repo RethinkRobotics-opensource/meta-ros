@@ -7,6 +7,7 @@ SRC_URI += " \
     file://0002-allow-proper-cross-compilation-with-catkin.patch \
     file://0003-builder.py-don-t-prepend-ld_path-to-LD_LIBRARY_PATH.patch \
     file://0001-oe-specific-removing-current-source-dir-from-pkg.patch \
+    file://0001-catkin-hacks-to-force-interpreter.patch \
 "
 
 ROS_BUILD_DEPENDS:remove = "${PYTHON_PN}-catkin-pkg"

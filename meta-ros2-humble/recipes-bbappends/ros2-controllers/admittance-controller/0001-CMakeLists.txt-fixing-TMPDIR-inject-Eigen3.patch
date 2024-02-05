@@ -1,0 +1,49 @@
+From 669ecd32ef61eb2c94f8ce0aebbb6bf816c17ae9 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Mon, 20 Nov 2023 23:08:49 +0100
+Subject: [PATCH] CMakeLists.txt: fixing TMPDIR inject Eigen3
+
+Eigen3 with ament does leak in the include dir. This fixes it.
+
+Upstream-Status: inappropriate (oe-specific)
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9ece5e7fb..05007c979 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -48,8 +48,26 @@ target_include_directories(admittance_controller PUBLIC
+ )
+ target_link_libraries(admittance_controller PUBLIC
+   admittance_controller_parameters
++  angles::angles
++  ${control_msgs_TARGETS}
++  control_toolbox::control_toolbox
++  controller_interface::controller_interface
++  Eigen3::Eigen
++  ${geometry_msgs_TARGETS}
++  hardware_interface::hardware_interface
++  joint_trajectory_controller::joint_trajectory_controller
++  kinematics_interface::kinematics_interface
++  pluginlib::pluginlib
++  rclcpp::rclcpp
++  rclcpp_lifecycle::rclcpp_lifecycle
++  realtime_tools::realtime_tools
++  tf2::tf2
++  tf2_eigen::tf2_eigen
++  ${tf2_geometry_msgs_TARGETS}
++  tf2_kdl::tf2_kdl
++  tf2_ros::tf2_ros
++  ${trajectory_msgs_TARGETS}
+ )
+-ament_target_dependencies(admittance_controller PUBLIC ${THIS_PACKAGE_INCLUDE_DEPENDS})
+ 
+ # Causes the visibility macros to use dllexport rather than dllimport,
+ # which is appropriate when building the dll but not consuming it.
+-- 
+2.41.0
+

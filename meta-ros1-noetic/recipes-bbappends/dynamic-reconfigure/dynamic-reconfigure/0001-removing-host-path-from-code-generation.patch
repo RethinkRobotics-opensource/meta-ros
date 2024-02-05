@@ -1,6 +1,6 @@
-From 4279cd75c580915f7fc8c1aeabaddc146a0b8ba6 Mon Sep 17 00:00:00 2001
+From e8dced8d8439848f19c57c5754e2f5ddd976a3dd Mon Sep 17 00:00:00 2001
 From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
-Date: Wed, 13 Sep 2023 17:09:03 +0200
+Date: Thu, 16 Nov 2023 19:50:59 +0100
 Subject: [PATCH] removing host path from code generation
 
 During parameter_generator, comments of the absolute path are generated
@@ -12,43 +12,43 @@ Upstream-Status: Inappropriate embedded specific
 
 Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
 ---
- src/dynamic_reconfigure/parameter_generator.py        | 8 ++++----
- src/dynamic_reconfigure/parameter_generator_catkin.py | 8 ++++----
- 2 files changed, 8 insertions(+), 8 deletions(-)
+ src/dynamic_reconfigure/parameter_generator.py        | 6 +++---
+ src/dynamic_reconfigure/parameter_generator_catkin.py | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/src/dynamic_reconfigure/parameter_generator.py b/src/dynamic_reconfigure/parameter_generator.py
-index 08640ea..f7055e5 100644
+index b3b72c8..f3e3816 100644
 --- a/src/dynamic_reconfigure/parameter_generator.py
 +++ b/src/dynamic_reconfigure/parameter_generator.py
-@@ -111,7 +111,7 @@ class ParameterGenerator:
+@@ -110,7 +110,7 @@ class ParameterGenerator:
              self.state = state
  
              self.srcline = inspect.currentframe().f_back.f_lineno
 -            self.srcfile = inspect.getsourcefile(inspect.currentframe().f_back.f_code)
-+            self.srcfile = inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1]
++            self.srcfile = inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1] if "/recipe-sysroot" in inspect.getsourcefile(inspect.currentframe().f_back.f_code) else inspect.getsourcefile(inspect.currentframe().f_back.f_code)
  
              self.instances[self.id] = self
  
-@@ -135,7 +135,7 @@ class ParameterGenerator:
+@@ -134,7 +134,7 @@ class ParameterGenerator:
                  'min': min,
                  'max': max,
                  'srcline': inspect.currentframe().f_back.f_lineno,
 -                'srcfile': inspect.getsourcefile(inspect.currentframe().f_back.f_code),
-+                'srcfile': inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1],
++                'srcfile': inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1] if "/recipe-sysroot" in inspect.getsourcefile(inspect.currentframe().f_back.f_code) else inspect.getsourcefile(inspect.currentframe().f_back.f_code),
                  'edit_method': edit_method,
              }
              if type == str_t and (max is not None or min is not None):
-@@ -466,7 +466,7 @@ class ParameterGenerator:
+@@ -465,7 +465,7 @@ class ParameterGenerator:
          # Read the configuration manipulator template and insert line numbers and file name into template.
          templatefile = os.path.join(self.dynconfpath, "templates", "ConfigType.h.template")
          templatelines = []
 -        templatefilesafe = templatefile.replace('\\', '\\\\')  # line directive does backslash expansion.
-+        templatefilesafe = templatefile.split("/recipe-sysroot",1)[1].replace('\\', '\\\\')  # line directive does backslash expansion.
++        templatefilesafe = templatefile.split("/recipe-sysroot",1)[1].replace('\\', '\\\\') if "/recipe-sysroot" in templatefile else templatefile.replace('\\', '\\\\')  # line directive does backslash expansion.
          curline = 1
          f = open(templatefile)
          for line in f:
 diff --git a/src/dynamic_reconfigure/parameter_generator_catkin.py b/src/dynamic_reconfigure/parameter_generator_catkin.py
-index 820d5f5..686be81 100644
+index 820d5f5..9718ac0 100644
 --- a/src/dynamic_reconfigure/parameter_generator_catkin.py
 +++ b/src/dynamic_reconfigure/parameter_generator_catkin.py
 @@ -112,7 +112,7 @@ class ParameterGenerator(object):
@@ -56,7 +56,7 @@ index 820d5f5..686be81 100644
  
              self.srcline = inspect.currentframe().f_back.f_lineno
 -            self.srcfile = inspect.getsourcefile(inspect.currentframe().f_back.f_code)
-+            self.srcfile = inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1]
++            self.srcfile = inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1] if "/recipe-sysroot" in inspect.getsourcefile(inspect.currentframe().f_back.f_code) else inspect.getsourcefile(inspect.currentframe().f_back.f_code)
  
              self.instances[self.id] = self
  
@@ -65,7 +65,7 @@ index 820d5f5..686be81 100644
                  'max': max,
                  'srcline': inspect.currentframe().f_back.f_lineno,
 -                'srcfile': inspect.getsourcefile(inspect.currentframe().f_back.f_code),
-+                'srcfile': inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1],
++                'srcfile': inspect.getsourcefile(inspect.currentframe().f_back.f_code).split("/recipe-sysroot",1)[1] if "/recipe-sysroot" in inspect.getsourcefile(inspect.currentframe().f_back.f_code) else inspect.getsourcefile(inspect.currentframe().f_back.f_code),
                  'edit_method': edit_method,
              }
              if (paramtype == str_t or paramtype == bool_t) and (max is not None or min is not None):
@@ -74,7 +74,7 @@ index 820d5f5..686be81 100644
          templatefile = os.path.join(self.dynconfpath, "templates", "ConfigType.h.template")
          templatelines = []
 -        templatefilesafe = templatefile.replace('\\', '\\\\')  # line directive does backslash expansion.
-+        templatefilesafe = templatefile.split("/recipe-sysroot",1)[1].replace('\\', '\\\\')  # line directive does backslash expansion.
++        templatefilesafe = templatefile.split("/recipe-sysroot",1)[1].replace('\\', '\\\\') if "/recipe-sysroot" in templatefile else templatefile.replace('\\', '\\\\') # line directive does backslash expansion.
          curline = 1
          with open(templatefile) as f:
              for line in f:

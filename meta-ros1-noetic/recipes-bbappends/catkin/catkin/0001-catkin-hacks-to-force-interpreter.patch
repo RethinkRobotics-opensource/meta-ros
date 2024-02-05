@@ -1,0 +1,50 @@
+From e94e79e1fb0843f1939d7516b97e4c59d2aeca34 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Wed, 15 Nov 2023 11:31:54 +0100
+Subject: [PATCH] catkin: hacks to force interpreter
+
+There have been some hacks to find the right interpreter
+on the target. I have no intention to repair them, as a
+shebang of
+should always do the job (okay, on linux, to be fair).
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ cmake/templates/_setup_util.py.in      | 2 +-
+ cmake/templates/env-hook.context.py.in | 2 +-
+ cmake/templates/script.py.in           | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/cmake/templates/_setup_util.py.in b/cmake/templates/_setup_util.py.in
+index 7ce2fe83..7098ef1f 100755
+--- a/cmake/templates/_setup_util.py.in
++++ b/cmake/templates/_setup_util.py.in
+@@ -1,4 +1,4 @@
+-#!@PYTHON_EXECUTABLE_TARGET@
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ 
+ # Software License Agreement (BSD License)
+diff --git a/cmake/templates/env-hook.context.py.in b/cmake/templates/env-hook.context.py.in
+index 10a109db..c0801466 100644
+--- a/cmake/templates/env-hook.context.py.in
++++ b/cmake/templates/env-hook.context.py.in
+@@ -30,4 +30,4 @@ PROJECT_NAME = '@PROJECT_NAME@'
+ PROJECT_BINARY_DIR = '@PROJECT_BINARY_DIR@'
+ PROJECT_SOURCE_DIR = '@PROJECT_SOURCE_DIR@'
+ 
+-PYTHON_EXECUTABLE = '@PYTHON_EXECUTABLE_TARGET@'
++PYTHON_EXECUTABLE = '/usr/bin/env python3'
+diff --git a/cmake/templates/script.py.in b/cmake/templates/script.py.in
+index 8672f422..b222adbe 100755
+--- a/cmake/templates/script.py.in
++++ b/cmake/templates/script.py.in
+@@ -1,4 +1,4 @@
+-#!@PYTHON_EXECUTABLE_TARGET@
++#!/usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ # generated from catkin/cmake/template/script.py.in
+ # creates a relay to a python script source file, acting as that file.
+-- 
+2.34.1
+
