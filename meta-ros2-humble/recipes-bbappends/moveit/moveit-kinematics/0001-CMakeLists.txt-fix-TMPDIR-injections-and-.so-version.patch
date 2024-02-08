@@ -1,0 +1,55 @@
+From 5450e14e95e7a3d264d90633d5fb1ff1c1910f6b Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Thu, 8 Feb 2024 18:40:05 +0100
+Subject: [PATCH] CMakeLists.txt: fix TMPDIR injections and .so version
+
+Using cmake targets instead of INCLUDE dirs to fix TMPDIR injections. Also
+fixing missing .so Version.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ kdl_kinematics_plugin/CMakeLists.txt | 23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/kdl_kinematics_plugin/CMakeLists.txt b/kdl_kinematics_plugin/CMakeLists.txt
+index 603c7db8d..cab0e2f8d 100644
+--- a/kdl_kinematics_plugin/CMakeLists.txt
++++ b/kdl_kinematics_plugin/CMakeLists.txt
+@@ -4,22 +4,23 @@ add_library(${MOVEIT_LIB_NAME} SHARED
+   src/kdl_kinematics_plugin.cpp
+   src/chainiksolver_vel_mimic_svd.cpp)
+ 
+-ament_target_dependencies(${MOVEIT_LIB_NAME}
+-  rclcpp
++target_link_libraries(${MOVEIT_LIB_NAME} PUBLIC
++  rclcpp::rclcpp
+   random_numbers
+-  pluginlib
+-  moveit_core
+-  moveit_msgs
+-  orocos_kdl
+-  kdl_parser
+-  tf2_kdl
+-  EIGEN3
+-)
++  pluginlib::pluginlib
++  moveit_core::moveit_utils
++  moveit_core::moveit_robot_model
++  ${moveit_msgs_TARGETS}
++  orocos-kdl
++  kdl_parser::kdl_parser
++  tf2_kdl::tf2_kdl
++  Eigen3::Eigen)
++
+ 
+ # prevent pluginlib from using boost
+ target_compile_definitions(${MOVEIT_LIB_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
+ # Causes the visibility macros to use dllexport rather than dllimport,
+ # which is appropriate when building the dll but not consuming it.
+ target_compile_definitions(${MOVEIT_LIB_NAME} PRIVATE "MOVEIT_KDL_KINEMATICS_PLUGIN_BUILDING_DLL")
+-
++set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+ install(DIRECTORY include/ DESTINATION include)
+-- 
+2.43.0
+

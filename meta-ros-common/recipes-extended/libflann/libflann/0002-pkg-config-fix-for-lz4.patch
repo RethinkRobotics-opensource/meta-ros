@@ -1,0 +1,45 @@
+From ccf1e3301f3db22c0bda71cb5d09b729f870e758 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Fri, 2 Feb 2024 18:54:02 +0100
+Subject: [PATCH] pkg-config: fix for lz4
+
+This is a hack to not let leak the host path into pc file.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+
+Upstream-Status: inappropriate (embedded specific)
+
+%% original patch: 0002-pkg-config-fix-for-lz4.patch
+---
+ cmake/Config.cmake.in | 3 +++
+ cmake/flann.pc.in     | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/cmake/Config.cmake.in b/cmake/Config.cmake.in
+index 6b95a71..86ecba5 100644
+--- a/cmake/Config.cmake.in
++++ b/cmake/Config.cmake.in
+@@ -1,5 +1,8 @@
+ @PACKAGE_INIT@
+ 
++find_package(PkgConfig REQUIRED)
++pkg_check_modules(LZ4 REQUIRED IMPORTED_TARGET liblz4)
++
+ include("${CMAKE_CURRENT_LIST_DIR}/@targets_export_name@.cmake")
+ check_required_components("flann")
+ 
+diff --git a/cmake/flann.pc.in b/cmake/flann.pc.in
+index 07b8d64..d72085c 100644
+--- a/cmake/flann.pc.in
++++ b/cmake/flann.pc.in
+@@ -8,6 +8,6 @@ Name: @PROJECT_NAME@
+ Description: @PKG_DESC@
+ Version: @FLANN_VERSION@
+ Requires: @PKG_EXTERNAL_DEPS@
+-Libs: -L${libdir} @LZ4_STATIC_LDFLAGS@ -lflann -lflann_cpp
++Libs: -L${libdir} -llz4 -lflann -lflann_cpp
+ Cflags: -I${includedir}
+ 
+-- 
+2.43.0
+

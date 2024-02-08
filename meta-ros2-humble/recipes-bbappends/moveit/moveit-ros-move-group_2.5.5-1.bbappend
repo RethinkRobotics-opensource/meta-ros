@@ -1,1 +1,5 @@
-INSANE_SKIP:${PN} += " dev-so "
+# fix for QA Issue [dev-so]
+
+FILES:${PN}-dev += " \
+    /usr/lib/*.so \
+"

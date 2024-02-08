@@ -1,0 +1,66 @@
+From 6cc88396374810a4cfe39e67dce4e1d03ef57cb0 Mon Sep 17 00:00:00 2001
+From: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+Date: Thu, 8 Feb 2024 19:22:06 +0100
+Subject: [PATCH] CMakeLists.txt: fix TMPDIR injections on cmake
+
+Using cmake targets instead of injected INCLUDES in the cmake config
+files.
+
+Signed-off-by: Matthias Schoepfer <m.schoepfer@rethinkrobotics.com>
+---
+ CMakeLists.txt | 23 ++++++++---------------
+ 1 file changed, 8 insertions(+), 15 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5276dbc90..87092d0ed 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -15,14 +15,6 @@ find_package(rclcpp_action REQUIRED)
+ # Finds Boost Components
+ include(ConfigExtras.cmake)
+ 
+-set(THIS_PACKAGE_INCLUDE_DEPENDS
+-  control_msgs
+-  rclcpp
+-  rclcpp_action
+-  moveit_core
+-  pluginlib
+-)
+-
+ include_directories(
+   include
+ )
+@@ -34,11 +26,16 @@ add_library(${PROJECT_NAME} SHARED
+ 
+ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+ 
+-ament_target_dependencies(${PROJECT_NAME}
+-  ${THIS_PACKAGE_INCLUDE_DEPENDS}
+-  Boost
++target_link_libraries(${PROJECT_NAME}
++  ${control_msgs_TARGETS}
++  rclcpp::rclcpp
++  rclcpp_action::rclcpp_action
++  moveit_core::moveit_utils
++  pluginlib::pluginlib
++  Boost::boost
+ )
+ 
++
+ install(
+   TARGETS ${PROJECT_NAME}
+   EXPORT export_${PROJECT_NAME}
+@@ -50,10 +47,6 @@ install(
+ install(DIRECTORY include/ DESTINATION include)
+ 
+ ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
+-ament_export_dependencies(
+-  ${THIS_PACKAGE_INCLUDE_DEPENDS}
+-  Boost
+-)
+ 
+ pluginlib_export_plugin_description_file(moveit_core moveit_simple_controller_manager_plugin_description.xml)
+ 
+-- 
+2.43.0
+
