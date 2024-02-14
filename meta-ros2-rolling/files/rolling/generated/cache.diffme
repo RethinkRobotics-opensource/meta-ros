@@ -1,4 +1,4 @@
-# rolling/cache.yaml 2024-02-09 4f8aea8473950f7bba4c2883e4fce93b819f18a7 20240208083117 1.7.0
+# rolling/cache.yaml 2024-02-09 f4e07369c9790cd890a4cb34c001c94e8d4aad69 20240213215035 1.7.0
 distribution_file:
 - release_platforms:
 -----
@@ -468,6 +468,13 @@ doc: {
 type: git,
 url: 'https://github.com/ros-misc-utilities/apriltag_detector.git',
 version: master
+},
+release: {
+tags: {
+release: 'release/rolling/{package}/{version}'
+},
+url: 'https://github.com/ros2-gbp/apriltag_detector-release.git',
+version: 1.0.0-1
 },
 source: {
 type: git,
@@ -2828,7 +2835,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/imu_pipeline-release.git',
-version: 0.4.1-1
+version: 0.5.0-1
 },
 source: {
 type: git,
@@ -3310,7 +3317,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/leo_common-release.git',
-version: 3.0.0-1
+version: 3.0.1-1
 },
 source: {
 type: git,
@@ -4166,7 +4173,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/mrpt2-release.git',
-version: 2.11.8-1
+version: 2.11.9-1
 },
 source: {
 type: git,
@@ -5328,7 +5335,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/point_cloud_transport-release.git',
-version: 3.0.2-1
+version: 3.0.3-1
 },
 source: {
 test_pull_requests: true,
@@ -6930,7 +6937,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/ros2_control-release.git',
-version: 4.4.0-1
+version: 4.5.0-1
 },
 source: {
 type: git,
@@ -6972,7 +6979,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/ros2_controllers-release.git',
-version: 4.5.0-1
+version: 4.6.0-1
 },
 source: {
 type: git,
@@ -10208,7 +10215,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/vrpn_mocap-release.git',
-version: 1.0.4-1
+version: 1.1.0-1
 },
 source: {
 type: git,
@@ -10480,6 +10487,7 @@ ackermann_steering_controller: <?xml version="1.0" ?>
 <depend>steering_controllers_library</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>hardware_interface</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
@@ -10679,6 +10687,7 @@ admittance_controller: <?xml version="1.0" ?>
 <depend>trajectory_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>kinematics_interface_kdl</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
@@ -12033,6 +12042,36 @@ apriltag: <?xml version="1.0" ?>
 </export>
 </package>
 -----
+apriltag_detector: <?xml version="1.0" ?>
+<package format="3">
+<name>apriltag_detector</name>
+<description>ROS package for apriltag detection</description>
+<maintainer email="bernd.pfrommer@gmail.com">Bernd Pfrommer</maintainer>
+<license>Apache2</license>
+<buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+<buildtool_depend condition="$ROS_VERSION == 2">ament_cmake_ros</buildtool_depend>
+<buildtool_depend condition="$ROS_VERSION == 2">ament_cmake_auto</buildtool_depend>
+<depend condition="$ROS_VERSION == 2">rclcpp</depend>
+<depend condition="$ROS_VERSION == 2">rclcpp_components</depend>
+<depend condition="$ROS_VERSION == 2">apriltag_msgs</depend>
+<test_depend condition="$ROS_VERSION == 2">ament_lint_auto</test_depend>
+<test_depend condition="$ROS_VERSION == 2">ament_lint_common</test_depend>
+<test_depend condition="$ROS_VERSION == 2">ament_cmake_clang_format</test_depend>
+<buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+<depend condition="$ROS_VERSION == 1">roscpp</depend>
+<depend condition="$ROS_VERSION == 1">nodelet</depend>
+<depend condition="$ROS_VERSION == 1">apriltag_detector_msgs</depend>
+<depend>image_transport</depend>
+<depend>sensor_msgs</depend>
+<depend>cv_bridge</depend>
+<depend>apriltag</depend>
+<export>
+<nodelet plugin="${prefix}/nodelet_plugins.xml"/>
+<build_type condition="$ROS_VERSION == 1">catkin</build_type>
+<build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+</export>
+</package>
+-----
 apriltag_msgs: <?xml version="1.0" ?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
@@ -12459,6 +12498,7 @@ bicycle_steering_controller: <?xml version="1.0" ?>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
 <test_depend>hardware_interface</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -14192,6 +14232,7 @@ diff_drive_controller: <?xml version="1.0" ?>
 <depend>tf2_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -15661,6 +15702,8 @@ effort_controllers: <?xml version="1.0" ?>
 <depend>rclcpp</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
+<test_depend>hardware_interface</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -16710,6 +16753,7 @@ force_torque_sensor_broadcaster: <?xml version="1.0" ?>
 <depend>generate_parameter_library</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -16735,6 +16779,7 @@ forward_command_controller: <?xml version="1.0" ?>
 <depend>std_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -18017,6 +18062,7 @@ gripper_controllers: "<?xml version=\"1.0\" ?>
 <depend>realtime_tools</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -18931,6 +18977,7 @@ imu_sensor_broadcaster: <?xml version="1.0" ?>
 <test_depend>ament_lint_auto</test_depend>
 <test_depend>ament_lint_common</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -19161,6 +19208,7 @@ joint_state_broadcaster: <?xml version="1.0" ?>
 <depend>sensor_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>hardware_interface</test_depend>
 <test_depend>rclcpp</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
@@ -19240,6 +19288,7 @@ joint_trajectory_controller: <?xml version="1.0" ?>
 <depend>trajectory_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -23583,6 +23632,7 @@ mrpt2: <?xml version="1.0" ?>
 <depend condition="$ROS_VERSION == 2">rosbag2_storage</depend>
 <depend condition="$ROS_VERSION == 1">roscpp</depend>
 <depend condition="$ROS_VERSION == 2">rclcpp</depend>
+<depend condition="$ROS_VERSION == 1">tf2_geometry_msgs</depend>
 <doc_depend>doxygen</doc_depend>
 <buildtool_depend>cmake</buildtool_depend>
 <export>
@@ -25501,6 +25551,7 @@ pid_controller: <?xml version="1.0" ?>
 <depend>std_srvs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -25788,17 +25839,10 @@ point_cloud_transport: <?xml version="1.0" ?>
 <depend>pluginlib</depend>
 <depend>rclcpp_components</depend>
 <depend>rclcpp</depend>
+<depend>rcpputils</depend>
 <depend>sensor_msgs</depend>
-<depend>tl_expected</depend>
-<test_depend>ament_cmake_gtest</test_depend>
-<test_depend>ament_cmake_copyright</test_depend>
-<test_depend>ament_cmake_cppcheck</test_depend>
-<test_depend>ament_cmake_cpplint</test_depend>
-<test_depend>ament_cmake_flake8</test_depend>
-<test_depend>ament_cmake_lint_cmake</test_depend>
-<test_depend>ament_cmake_pep257</test_depend>
-<test_depend>ament_cmake_uncrustify</test_depend>
-<test_depend>ament_cmake_xmllint</test_depend>
+<test_depend>ament_lint_common</test_depend>
+<test_depend>ament_lint_auto</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
 </export>
@@ -26036,6 +26080,8 @@ position_controllers: <?xml version="1.0" ?>
 <depend>rclcpp</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
+<test_depend>hardware_interface</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -26608,7 +26654,7 @@ range_sensor_broadcaster: <?xml version="1.0" ?>
 <depend>sensor_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
-<test_depend>hardware_interface</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -36524,6 +36570,7 @@ tricycle_controller: <?xml version="1.0" ?>
 <depend>tf2_msgs</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -36555,7 +36602,7 @@ tricycle_steering_controller: <?xml version="1.0" ?>
 <depend>steering_controllers_library</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
-<test_depend>hardware_interface</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
 <build_type>ament_cmake</build_type>
@@ -37821,6 +37868,7 @@ velocity_controllers: <?xml version="1.0" ?>
 <depend>rclcpp</depend>
 <test_depend>ament_cmake_gmock</test_depend>
 <test_depend>controller_manager</test_depend>
+<test_depend>hardware_interface_testing</test_depend>
 <test_depend>hardware_interface</test_depend>
 <test_depend>ros2_control_test_assets</test_depend>
 <export>
