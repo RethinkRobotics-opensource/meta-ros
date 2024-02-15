@@ -5868,6 +5868,7 @@ python3-flake8-builtins:
       pip:
         packages: [flake8-builtins]
   fedora: [python3-flake8-builtins]
+  openembedded: [python3-flake8-builtins@meta-ros-common]
   opensuse: [python3-flake8-builtins]
   rhel:
     '*': [python3-flake8-builtins]
@@ -5904,6 +5905,7 @@ python3-flake8-comprehensions:
       pip:
         packages: [flake8-comprehensions]
   fedora: [python3-flake8-comprehensions]
+  openembedded: [python3-flake8-comprehensions@meta-ros-common]
   rhel:
     '*': [python3-flake8-comprehensions]
     '8':
@@ -5936,6 +5938,7 @@ python3-flake8-docstrings:
   arch: [python-flake8-docstrings]
   debian: [python3-flake8-docstrings]
   fedora: [python3-flake8-docstrings]
+  openembedded: [python3-flake8-docstrings@meta-ros-common]
   opensuse: [python3-flake8-docstrings]
   rhel:
     '*': [python3-flake8-docstrings]
@@ -5952,6 +5955,7 @@ python3-flake8-import-order:
       pip:
         packages: [flake8-import-order]
   fedora: [python3-flake8-import-order]
+  openembedded: [python3-flake8-import-order@meta-ros-common]
   opensuse: [python3-flake8-import-order]
   rhel:
     '*': [python3-flake8-import-order]
@@ -5988,6 +5992,7 @@ python3-flake8-quotes:
   fedora:
     '*': [python3-flake8-quotes]
     '35': null
+  openembedded: [python3-flake8-quotes@meta-ros-common]
   opensuse: [python3-flake8-quotes]
   rhel:
     '*': [python3-flake8-quotes]
