@@ -109,6 +109,7 @@ black:
   fedora: [black]
   gentoo: [dev-python/black]
   nixos: [pythonPackages.black]
+  openembedded: [python3-black@meta-ros]
   ubuntu:
     '*': [black]
     bionic: null

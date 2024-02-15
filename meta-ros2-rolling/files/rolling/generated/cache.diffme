@@ -1,4 +1,4 @@
-# rolling/cache.yaml 2024-02-09 f4e07369c9790cd890a4cb34c001c94e8d4aad69 20240213215035 1.7.0
+# rolling/cache.yaml 2024-02-09 09217d47bdde61b69a27d705caca1f62ff1acec6 20240214205735 1.7.0
 distribution_file:
 - release_platforms:
 -----
@@ -4800,7 +4800,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/openni2_camera-release.git',
-version: 2.0.2-1
+version: 2.1.0-1
 },
 source: {
 type: git,
