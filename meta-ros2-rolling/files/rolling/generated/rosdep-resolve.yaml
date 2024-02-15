@@ -400,15 +400,15 @@ python3-fiona:
 python3-flake8:
 - python3-flake8@meta-ros-common
 python3-flake8-builtins:
-- ${ROS_UNRESOLVED_DEP-python3-flake8-builtins}
+- python3-flake8-builtins@meta-ros-common
 python3-flake8-comprehensions:
-- ${ROS_UNRESOLVED_DEP-python3-flake8-comprehensions}
+- python3-flake8-comprehensions@meta-ros-common
 python3-flake8-docstrings:
-- ${ROS_UNRESOLVED_DEP-python3-flake8-docstrings}
+- python3-flake8-docstrings@meta-ros-common
 python3-flake8-import-order:
-- ${ROS_UNRESOLVED_DEP-python3-flake8-import-order}
+- python3-flake8-import-order@meta-ros-common
 python3-flake8-quotes:
-- ${ROS_UNRESOLVED_DEP-python3-flake8-quotes}
+- python3-flake8-quotes@meta-ros-common
 python3-future:
 - python3-future@meta-python
 python3-git:

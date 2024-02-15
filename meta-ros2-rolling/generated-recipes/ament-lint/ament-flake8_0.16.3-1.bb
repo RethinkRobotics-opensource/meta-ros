@@ -27,13 +27,13 @@ ROS_EXPORT_DEPENDS = ""
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-builtins} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-comprehensions} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-docstrings} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-import-order} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-quotes} \
     ament-lint \
     python3-flake8 \
+    python3-flake8-builtins \
+    python3-flake8-comprehensions \
+    python3-flake8-docstrings \
+    python3-flake8-import-order \
+    python3-flake8-quotes \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.

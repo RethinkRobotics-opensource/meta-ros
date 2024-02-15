@@ -3500,11 +3500,6 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     ${ROS_UNRESOLVED_DEP-ocl-icd-opencl-dev} \
     ${ROS_UNRESOLVED_DEP-python3-collada} \
     ${ROS_UNRESOLVED_DEP-python3-construct} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-builtins} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-comprehensions} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-docstrings} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-import-order} \
-    ${ROS_UNRESOLVED_DEP-python3-flake8-quotes} \
     ${ROS_UNRESOLVED_DEP-python3-scipy} \
     ${ROS_UNRESOLVED_DEP-python3-venv} \
     ${ROS_UNRESOLVED_DEP-range-v3} \
@@ -3625,6 +3620,11 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     python3-empy-native \
     python3-fiona \
     python3-flake8 \
+    python3-flake8-builtins \
+    python3-flake8-comprehensions \
+    python3-flake8-docstrings \
+    python3-flake8-import-order \
+    python3-flake8-quotes \
     python3-future \
     python3-git \
     python3-img2pdf \
@@ -4266,11 +4266,6 @@ ROS_UNRESOLVED_DEP-matio = "ROS_UNRESOLVED_DEP-matio"
 ROS_UNRESOLVED_DEP-ocl-icd-opencl-dev = "ROS_UNRESOLVED_DEP-ocl-icd-opencl-dev"
 ROS_UNRESOLVED_DEP-python3-collada = "ROS_UNRESOLVED_DEP-python3-collada"
 ROS_UNRESOLVED_DEP-python3-construct = "ROS_UNRESOLVED_DEP-python3-construct"
-ROS_UNRESOLVED_DEP-python3-flake8-builtins = "ROS_UNRESOLVED_DEP-python3-flake8-builtins"
-ROS_UNRESOLVED_DEP-python3-flake8-comprehensions = "ROS_UNRESOLVED_DEP-python3-flake8-comprehensions"
-ROS_UNRESOLVED_DEP-python3-flake8-docstrings = "ROS_UNRESOLVED_DEP-python3-flake8-docstrings"
-ROS_UNRESOLVED_DEP-python3-flake8-import-order = "ROS_UNRESOLVED_DEP-python3-flake8-import-order"
-ROS_UNRESOLVED_DEP-python3-flake8-quotes = "ROS_UNRESOLVED_DEP-python3-flake8-quotes"
 ROS_UNRESOLVED_DEP-python3-scipy = "ROS_UNRESOLVED_DEP-python3-scipy"
 ROS_UNRESOLVED_DEP-python3-venv = "ROS_UNRESOLVED_DEP-python3-venv"
 ROS_UNRESOLVED_DEP-range-v3 = "ROS_UNRESOLVED_DEP-range-v3"
