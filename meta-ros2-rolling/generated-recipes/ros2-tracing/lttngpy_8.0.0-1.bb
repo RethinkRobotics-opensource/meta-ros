@@ -19,7 +19,7 @@ ROS_CN = "ros2_tracing"
 ROS_BPN = "lttngpy"
 
 ROS_BUILD_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-liblttng-ctl-dev} \
+    lttng-tools \
     pybind11-vendor \
 "
 
@@ -29,13 +29,13 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-liblttng-ctl-dev} \
+    lttng-tools \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-liblttng-ctl-dev} \
+    lttng-tools \
     rpyutils \
 "
 

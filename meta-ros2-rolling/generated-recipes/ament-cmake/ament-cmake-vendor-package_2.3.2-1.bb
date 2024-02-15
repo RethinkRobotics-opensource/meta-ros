@@ -28,9 +28,9 @@ ROS_BUILDTOOL_DEPENDS = " \
 ROS_EXPORT_DEPENDS = ""
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-python3-vcstool-native} \
     ament-cmake-core-native \
     ament-cmake-export-dependencies-native \
+    python3-vcstool-native \
 "
 
 ROS_EXEC_DEPENDS = ""

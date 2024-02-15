@@ -33,12 +33,12 @@ ROS_EXEC_DEPENDS = " \
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-python3-pytest-timeout} \
     ament-copyright \
     ament-flake8 \
     ament-pep257 \
     ament-xmllint \
     python3-pytest \
+    python3-pytest-timeout \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"

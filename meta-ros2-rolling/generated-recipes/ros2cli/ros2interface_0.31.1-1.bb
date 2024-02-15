@@ -35,7 +35,6 @@ ROS_EXEC_DEPENDS = " \
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-python3-pytest-timeout} \
     ament-copyright \
     ament-flake8 \
     ament-pep257 \
@@ -44,6 +43,7 @@ ROS_TEST_DEPENDS = " \
     launch-testing \
     launch-testing-ros \
     python3-pytest \
+    python3-pytest-timeout \
     ros2cli-test-interfaces \
     test-msgs \
 "

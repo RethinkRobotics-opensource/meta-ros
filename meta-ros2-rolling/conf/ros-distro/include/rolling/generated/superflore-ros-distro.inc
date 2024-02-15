@@ -3353,8 +3353,6 @@ ROS_SUPERFLORE_GENERATED_WORLD_PACKAGES = " \
 # Packages found in the <buildtool_depend> and <buildtool_export_depend> items, ie, ones for which a -native is built. Does not
 # include those found in the ROS_EXEC_DEPENDS values in the recipes of build tools.
 ROS_SUPERFLORE_GENERATED_BUILDTOOLS_ROLLING = " \
-    ${ROS_UNRESOLVED_DEP-hdf5-tools-native} \
-    ${ROS_UNRESOLVED_DEP-python3-vcstool-native} \
     action-msgs-native \
     ament-black-native \
     ament-clang-format-native \
@@ -3415,6 +3413,7 @@ ROS_SUPERFLORE_GENERATED_BUILDTOOLS_ROLLING = " \
     gmock-vendor-native \
     gtest-native \
     gtest-vendor-native \
+    hdf5-native \
     launch-testing-ament-cmake-native \
     launch-testing-native \
     lcov-native \
@@ -3428,6 +3427,7 @@ ROS_SUPERFLORE_GENERATED_BUILDTOOLS_ROLLING = " \
     python3-pyyaml-native \
     python3-rospkg-native \
     python3-setuptools-native \
+    python3-vcstool-native \
     qtbase-native \
     rmf-building-map-tools-native \
     rmw-implementation-cmake-native \
@@ -3459,7 +3459,6 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     ${PYTHON_PN}-pydocstyle \
     ${PYTHON_PN}-pyflakes \
     ${PYTHON_PN}-pyqt5 \
-    ${ROS_UNRESOLVED_DEP-cargo} \
     ${ROS_UNRESOLVED_DEP-clang-format} \
     ${ROS_UNRESOLVED_DEP-clang-tidy} \
     ${ROS_UNRESOLVED_DEP-coinor-libipopt-dev} \
@@ -3470,7 +3469,6 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     ${ROS_UNRESOLVED_DEP-gazebo} \
     ${ROS_UNRESOLVED_DEP-geos} \
     ${ROS_UNRESOLVED_DEP-gurumdds-2.8} \
-    ${ROS_UNRESOLVED_DEP-hdf5-tools-native} \
     ${ROS_UNRESOLVED_DEP-ignition-cmake2} \
     ${ROS_UNRESOLVED_DEP-ignition-fortress} \
     ${ROS_UNRESOLVED_DEP-ignition-fuel-tools7} \
@@ -3489,61 +3487,31 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     ${ROS_UNRESOLVED_DEP-libfyaml-dev} \
     ${ROS_UNRESOLVED_DEP-libgazebo11-dev} \
     ${ROS_UNRESOLVED_DEP-libgdal-dev} \
-    ${ROS_UNRESOLVED_DEP-liblttng-ctl-dev} \
     ${ROS_UNRESOLVED_DEP-libomp-dev} \
     ${ROS_UNRESOLVED_DEP-libopen3d-dev} \
     ${ROS_UNRESOLVED_DEP-libopenni-dev} \
     ${ROS_UNRESOLVED_DEP-libopenni2-dev} \
     ${ROS_UNRESOLVED_DEP-libopenscenegraph} \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqtt-dev} \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqttpp-dev} \
     ${ROS_UNRESOLVED_DEP-libqglviewer2-qt5} \
-    ${ROS_UNRESOLVED_DEP-libqt5-qml} \
-    ${ROS_UNRESOLVED_DEP-libqt5-quick} \
-    ${ROS_UNRESOLVED_DEP-libqt5-svg} \
     ${ROS_UNRESOLVED_DEP-libspnav-dev} \
     ${ROS_UNRESOLVED_DEP-libtins-dev} \
     ${ROS_UNRESOLVED_DEP-libxkbcommon-dev} \
-    ${ROS_UNRESOLVED_DEP-libyaml-dev} \
-    ${ROS_UNRESOLVED_DEP-libyaml} \
-    ${ROS_UNRESOLVED_DEP-lttng-tools} \
     ${ROS_UNRESOLVED_DEP-matio} \
     ${ROS_UNRESOLVED_DEP-ocl-icd-opencl-dev} \
-    ${ROS_UNRESOLVED_DEP-opende} \
-    ${ROS_UNRESOLVED_DEP-python3-babeltrace} \
     ${ROS_UNRESOLVED_DEP-python3-collada} \
     ${ROS_UNRESOLVED_DEP-python3-construct} \
-    ${ROS_UNRESOLVED_DEP-python3-fiona} \
     ${ROS_UNRESOLVED_DEP-python3-flake8-builtins} \
     ${ROS_UNRESOLVED_DEP-python3-flake8-comprehensions} \
     ${ROS_UNRESOLVED_DEP-python3-flake8-docstrings} \
     ${ROS_UNRESOLVED_DEP-python3-flake8-import-order} \
     ${ROS_UNRESOLVED_DEP-python3-flake8-quotes} \
-    ${ROS_UNRESOLVED_DEP-python3-git} \
-    ${ROS_UNRESOLVED_DEP-python3-img2pdf} \
-    ${ROS_UNRESOLVED_DEP-python3-jinja2} \
-    ${ROS_UNRESOLVED_DEP-python3-jsonschema} \
-    ${ROS_UNRESOLVED_DEP-python3-natsort} \
-    ${ROS_UNRESOLVED_DEP-python3-ntplib} \
-    ${ROS_UNRESOLVED_DEP-python3-protobuf} \
-    ${ROS_UNRESOLVED_DEP-python3-pytest-timeout} \
-    ${ROS_UNRESOLVED_DEP-python3-rtree} \
     ${ROS_UNRESOLVED_DEP-python3-scipy} \
-    ${ROS_UNRESOLVED_DEP-python3-shapely} \
-    ${ROS_UNRESOLVED_DEP-python3-typeguard} \
-    ${ROS_UNRESOLVED_DEP-python3-unidiff} \
-    ${ROS_UNRESOLVED_DEP-python3-uvloop} \
-    ${ROS_UNRESOLVED_DEP-python3-vcstool-native} \
     ${ROS_UNRESOLVED_DEP-python3-venv} \
     ${ROS_UNRESOLVED_DEP-range-v3} \
     ${ROS_UNRESOLVED_DEP-rti-connext-dds-6.0.1} \
     ${ROS_UNRESOLVED_DEP-sdformat12} \
     ${ROS_UNRESOLVED_DEP-simde} \
-    ${ROS_UNRESOLVED_DEP-socat} \
     ${ROS_UNRESOLVED_DEP-spacenavd} \
-    ${ROS_UNRESOLVED_DEP-sqlite3} \
-    ${ROS_UNRESOLVED_DEP-wayland-dev} \
-    ${ROS_UNRESOLVED_DEP-wayland} \
     abseil-cpp \
     acl \
     adwaita-icon-theme \
@@ -3556,6 +3524,7 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     bullet \
     bzip2 \
     cairo \
+    cargo \
     ceres-solver \
     clang-native \
     clang-native-native \
@@ -3591,6 +3560,7 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     gtest-native \
     gtk+3 \
     hdf5 \
+    hdf5-native \
     jpeg \
     jq \
     jsoncpp \
@@ -3619,17 +3589,21 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     libxrandr \
     libxxf86vm \
     libyaml \
+    lttng-tools \
     lttng-ust \
     lua \
     lz4 \
     mesa \
     ncurses \
     nlohmann-json \
+    ode \
     openblas \
     opencl-headers \
     opencv \
     openssl \
     orocos-kdl \
+    paho-mqtt-c \
+    paho-mqtt-cpp \
     pcl \
     pkgconfig \
     pkgconfig-native \
@@ -3640,6 +3614,7 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     python3 \
     python3-argcomplete \
     python3-autobahn \
+    python3-babeltrace \
     python3-black \
     python3-catkin-pkg \
     python3-catkin-pkg-native \
@@ -3648,20 +3623,28 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     python3-dbus \
     python3-empy \
     python3-empy-native \
+    python3-fiona \
     python3-flake8 \
     python3-future \
+    python3-git \
+    python3-img2pdf \
     python3-importlib-metadata \
+    python3-jinja2 \
+    python3-jsonschema \
     python3-lark-parser \
     python3-lxml \
     python3-matplotlib \
     python3-mock \
     python3-mypy \
     python3-native \
+    python3-natsort \
+    python3-ntplib \
     python3-numpy \
     python3-packaging \
     python3-pandas \
     python3-pillow \
     python3-pip \
+    python3-protobuf \
     python3-psutil \
     python3-pybind11 \
     python3-pycairo \
@@ -3676,28 +3659,37 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     python3-pytest \
     python3-pytest-mock \
     python3-pytest-native \
+    python3-pytest-timeout \
     python3-pyyaml \
     python3-pyyaml-native \
     python3-requests \
     python3-rosdistro \
     python3-rospkg \
     python3-rospkg-native \
+    python3-rtree \
     python3-setuptools \
     python3-setuptools-native \
+    python3-shapely \
     python3-sphinx \
     python3-tkinter \
     python3-tornado \
     python3-twisted \
+    python3-typeguard \
+    python3-unidiff \
+    python3-uvloop \
+    python3-vcstool-native \
     python3-websocket-client \
     python3-whichcraft \
     qhull \
     qtbase \
     qtbase-native \
+    qtdeclarative \
     qtsvg \
     qttools \
     qtwebsockets \
     qtx11extras \
     qwt-qt5 \
+    socat \
     spdlog \
     spirv-headers \
     spirv-tools \
@@ -3715,6 +3707,7 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     util-linux \
     v4l-utils \
     vulkan-headers \
+    wayland \
     websocketpp \
     wget \
     wget-native \
@@ -3733,7 +3726,6 @@ ROS_SUPERFLORE_GENERATED_TESTS = " \
     ${ROS_UNRESOLVED_DEP-iwyu} \
     ${ROS_UNRESOLVED_DEP-libclang-dev} \
     ${ROS_UNRESOLVED_DEP-matio} \
-    ${ROS_UNRESOLVED_DEP-python3-pytest-timeout} \
     ament-clang-format \
     ament-cmake-black \
     ament-cmake-google-benchmark \
@@ -3763,6 +3755,7 @@ ROS_SUPERFLORE_GENERATED_TESTS = " \
     python3-autobahn \
     python3-mock \
     python3-pytest-mock \
+    python3-pytest-timeout \
     python3-websocket-client \
     qwt-qt5 \
     rclpy-message-converter-msgs \
@@ -4232,7 +4225,6 @@ ROS_SUPERFLORE_GENERATED_RECIPES_FOR_COMPONENTS = " \
 
 # Platform packages without a OE-RECIPE@OE-LAYER mapping in base.yaml, python.yaml, or ruby.yaml. Until they are added, override
 # the settings in ros-distro.inc .
-ROS_UNRESOLVED_DEP-cargo = "ROS_UNRESOLVED_DEP-cargo"
 ROS_UNRESOLVED_DEP-clang-format = "ROS_UNRESOLVED_DEP-clang-format"
 ROS_UNRESOLVED_DEP-clang-tidy = "ROS_UNRESOLVED_DEP-clang-tidy"
 ROS_UNRESOLVED_DEP-coinor-libipopt-dev = "ROS_UNRESOLVED_DEP-coinor-libipopt-dev"
@@ -4243,7 +4235,6 @@ ROS_UNRESOLVED_DEP-gazebo = "ROS_UNRESOLVED_DEP-gazebo"
 ROS_UNRESOLVED_DEP-gazebo11 = "ROS_UNRESOLVED_DEP-gazebo11"
 ROS_UNRESOLVED_DEP-geos = "ROS_UNRESOLVED_DEP-geos"
 ROS_UNRESOLVED_DEP-gurumdds-2.8 = "ROS_UNRESOLVED_DEP-gurumdds-2.8"
-ROS_UNRESOLVED_DEP-hdf5-tools-native = "ROS_UNRESOLVED_DEP-hdf5-tools-native"
 ROS_UNRESOLVED_DEP-ignition-cmake2 = "ROS_UNRESOLVED_DEP-ignition-cmake2"
 ROS_UNRESOLVED_DEP-ignition-fortress = "ROS_UNRESOLVED_DEP-ignition-fortress"
 ROS_UNRESOLVED_DEP-ignition-fuel-tools7 = "ROS_UNRESOLVED_DEP-ignition-fuel-tools7"
@@ -4262,61 +4253,31 @@ ROS_UNRESOLVED_DEP-libdraco-dev = "ROS_UNRESOLVED_DEP-libdraco-dev"
 ROS_UNRESOLVED_DEP-libfyaml-dev = "ROS_UNRESOLVED_DEP-libfyaml-dev"
 ROS_UNRESOLVED_DEP-libgazebo11-dev = "ROS_UNRESOLVED_DEP-libgazebo11-dev"
 ROS_UNRESOLVED_DEP-libgdal-dev = "ROS_UNRESOLVED_DEP-libgdal-dev"
-ROS_UNRESOLVED_DEP-liblttng-ctl-dev = "ROS_UNRESOLVED_DEP-liblttng-ctl-dev"
 ROS_UNRESOLVED_DEP-libomp-dev = "ROS_UNRESOLVED_DEP-libomp-dev"
 ROS_UNRESOLVED_DEP-libopen3d-dev = "ROS_UNRESOLVED_DEP-libopen3d-dev"
 ROS_UNRESOLVED_DEP-libopenni-dev = "ROS_UNRESOLVED_DEP-libopenni-dev"
 ROS_UNRESOLVED_DEP-libopenni2-dev = "ROS_UNRESOLVED_DEP-libopenni2-dev"
 ROS_UNRESOLVED_DEP-libopenscenegraph = "ROS_UNRESOLVED_DEP-libopenscenegraph"
-ROS_UNRESOLVED_DEP-libpaho-mqtt-dev = "ROS_UNRESOLVED_DEP-libpaho-mqtt-dev"
-ROS_UNRESOLVED_DEP-libpaho-mqttpp-dev = "ROS_UNRESOLVED_DEP-libpaho-mqttpp-dev"
 ROS_UNRESOLVED_DEP-libqglviewer2-qt5 = "ROS_UNRESOLVED_DEP-libqglviewer2-qt5"
-ROS_UNRESOLVED_DEP-libqt5-qml = "ROS_UNRESOLVED_DEP-libqt5-qml"
-ROS_UNRESOLVED_DEP-libqt5-quick = "ROS_UNRESOLVED_DEP-libqt5-quick"
-ROS_UNRESOLVED_DEP-libqt5-svg = "ROS_UNRESOLVED_DEP-libqt5-svg"
 ROS_UNRESOLVED_DEP-libspnav-dev = "ROS_UNRESOLVED_DEP-libspnav-dev"
 ROS_UNRESOLVED_DEP-libtins-dev = "ROS_UNRESOLVED_DEP-libtins-dev"
 ROS_UNRESOLVED_DEP-libxkbcommon-dev = "ROS_UNRESOLVED_DEP-libxkbcommon-dev"
-ROS_UNRESOLVED_DEP-libyaml = "ROS_UNRESOLVED_DEP-libyaml"
-ROS_UNRESOLVED_DEP-libyaml-dev = "ROS_UNRESOLVED_DEP-libyaml-dev"
-ROS_UNRESOLVED_DEP-lttng-tools = "ROS_UNRESOLVED_DEP-lttng-tools"
 ROS_UNRESOLVED_DEP-matio = "ROS_UNRESOLVED_DEP-matio"
 ROS_UNRESOLVED_DEP-ocl-icd-opencl-dev = "ROS_UNRESOLVED_DEP-ocl-icd-opencl-dev"
-ROS_UNRESOLVED_DEP-opende = "ROS_UNRESOLVED_DEP-opende"
-ROS_UNRESOLVED_DEP-python3-babeltrace = "ROS_UNRESOLVED_DEP-python3-babeltrace"
 ROS_UNRESOLVED_DEP-python3-collada = "ROS_UNRESOLVED_DEP-python3-collada"
 ROS_UNRESOLVED_DEP-python3-construct = "ROS_UNRESOLVED_DEP-python3-construct"
-ROS_UNRESOLVED_DEP-python3-fiona = "ROS_UNRESOLVED_DEP-python3-fiona"
 ROS_UNRESOLVED_DEP-python3-flake8-builtins = "ROS_UNRESOLVED_DEP-python3-flake8-builtins"
 ROS_UNRESOLVED_DEP-python3-flake8-comprehensions = "ROS_UNRESOLVED_DEP-python3-flake8-comprehensions"
 ROS_UNRESOLVED_DEP-python3-flake8-docstrings = "ROS_UNRESOLVED_DEP-python3-flake8-docstrings"
 ROS_UNRESOLVED_DEP-python3-flake8-import-order = "ROS_UNRESOLVED_DEP-python3-flake8-import-order"
 ROS_UNRESOLVED_DEP-python3-flake8-quotes = "ROS_UNRESOLVED_DEP-python3-flake8-quotes"
-ROS_UNRESOLVED_DEP-python3-git = "ROS_UNRESOLVED_DEP-python3-git"
-ROS_UNRESOLVED_DEP-python3-img2pdf = "ROS_UNRESOLVED_DEP-python3-img2pdf"
-ROS_UNRESOLVED_DEP-python3-jinja2 = "ROS_UNRESOLVED_DEP-python3-jinja2"
-ROS_UNRESOLVED_DEP-python3-jsonschema = "ROS_UNRESOLVED_DEP-python3-jsonschema"
-ROS_UNRESOLVED_DEP-python3-natsort = "ROS_UNRESOLVED_DEP-python3-natsort"
-ROS_UNRESOLVED_DEP-python3-ntplib = "ROS_UNRESOLVED_DEP-python3-ntplib"
-ROS_UNRESOLVED_DEP-python3-protobuf = "ROS_UNRESOLVED_DEP-python3-protobuf"
-ROS_UNRESOLVED_DEP-python3-pytest-timeout = "ROS_UNRESOLVED_DEP-python3-pytest-timeout"
-ROS_UNRESOLVED_DEP-python3-rtree = "ROS_UNRESOLVED_DEP-python3-rtree"
 ROS_UNRESOLVED_DEP-python3-scipy = "ROS_UNRESOLVED_DEP-python3-scipy"
-ROS_UNRESOLVED_DEP-python3-shapely = "ROS_UNRESOLVED_DEP-python3-shapely"
-ROS_UNRESOLVED_DEP-python3-typeguard = "ROS_UNRESOLVED_DEP-python3-typeguard"
-ROS_UNRESOLVED_DEP-python3-unidiff = "ROS_UNRESOLVED_DEP-python3-unidiff"
-ROS_UNRESOLVED_DEP-python3-uvloop = "ROS_UNRESOLVED_DEP-python3-uvloop"
-ROS_UNRESOLVED_DEP-python3-vcstool-native = "ROS_UNRESOLVED_DEP-python3-vcstool-native"
 ROS_UNRESOLVED_DEP-python3-venv = "ROS_UNRESOLVED_DEP-python3-venv"
 ROS_UNRESOLVED_DEP-range-v3 = "ROS_UNRESOLVED_DEP-range-v3"
 ROS_UNRESOLVED_DEP-rti-connext-dds-6.0.1 = "ROS_UNRESOLVED_DEP-rti-connext-dds-6.0.1"
 ROS_UNRESOLVED_DEP-sdformat12 = "ROS_UNRESOLVED_DEP-sdformat12"
 ROS_UNRESOLVED_DEP-simde = "ROS_UNRESOLVED_DEP-simde"
-ROS_UNRESOLVED_DEP-socat = "ROS_UNRESOLVED_DEP-socat"
 ROS_UNRESOLVED_DEP-spacenavd = "ROS_UNRESOLVED_DEP-spacenavd"
-ROS_UNRESOLVED_DEP-sqlite3 = "ROS_UNRESOLVED_DEP-sqlite3"
-ROS_UNRESOLVED_DEP-wayland = "ROS_UNRESOLVED_DEP-wayland"
-ROS_UNRESOLVED_DEP-wayland-dev = "ROS_UNRESOLVED_DEP-wayland-dev"
 
 # From the release announcement or the last field of the "<ROS_DISTRO>/YYYY-MM-DD" tag for the release in
 # https://github.com/ros/rosdistro/tags. Prior to the first release of a ROS_DISTRO, it is set to "".

@@ -17,10 +17,10 @@ ROS_CN = "mqtt_client"
 ROS_BPN = "mqtt_client"
 
 ROS_BUILD_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqtt-dev} \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqttpp-dev} \
     fmt \
     mqtt-client-interfaces \
+    paho-mqtt-c \
+    paho-mqtt-cpp \
     rclcpp \
     rclcpp-components \
     rcpputils \
@@ -33,10 +33,10 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqtt-dev} \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqttpp-dev} \
     fmt \
     mqtt-client-interfaces \
+    paho-mqtt-c \
+    paho-mqtt-cpp \
     rclcpp \
     rclcpp-components \
     rcpputils \
@@ -47,10 +47,10 @@ ROS_EXPORT_DEPENDS = " \
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqtt-dev} \
-    ${ROS_UNRESOLVED_DEP-libpaho-mqttpp-dev} \
     fmt \
     mqtt-client-interfaces \
+    paho-mqtt-c \
+    paho-mqtt-cpp \
     rclcpp \
     rclcpp-components \
     rcpputils \

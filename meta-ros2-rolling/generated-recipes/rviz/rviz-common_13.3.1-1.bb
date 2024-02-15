@@ -62,11 +62,11 @@ ROS_EXPORT_DEPENDS = " \
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-libqt5-svg} \
     geometry-msgs \
     message-filters \
     pluginlib \
     qtbase \
+    qtsvg \
     rclcpp \
     resource-retriever \
     rviz-ogre-vendor \
