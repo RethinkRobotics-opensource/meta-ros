@@ -26,9 +26,9 @@ ROS_EXPORT_DEPENDS = ""
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-black} \
     ${ROS_UNRESOLVED_DEP-python3-unidiff} \
     ${ROS_UNRESOLVED_DEP-python3-uvloop} \
+    python3-black \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.

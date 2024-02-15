@@ -22,7 +22,7 @@ ROS_SUPERFLORE_GENERATION_NOT_POSSIBLE = ""
 
 # Number of commits that will be returned by "git log meta-ros2-rolling/files/rolling/generated/cache.yaml" when the
 # generated files are committed. This is used for the fourth version field of DISTRO_VERSION.
-ROS_NUM_CACHE_YAML_COMMITS = "20"
+ROS_NUM_CACHE_YAML_COMMITS = "21"
 
 # Iterated values of ROS_DISTRO-cache.distribution_file.release_platforms.<LINUX-DISTRO>.[ <NAME> ... ] .
 ROS_DISTRO_RELEASE_PLATFORMS = " \
@@ -1705,7 +1705,7 @@ ROS_SUPERFLORE_GENERATED_RECIPE_BASENAMES_WITH_COMPONENT = " \
                         odri-master-board/odri-master-board-sdk_1.0.6-3 \
                                      ompl/ompl_1.5.2-3 \
                         perception-open3d/open3d-conversions_0.1.2-2 \
-                           openni2-camera/openni2-camera_2.0.2-1 \
+                           openni2-camera/openni2-camera_2.1.0-1 \
                         orocos-kdl-vendor/orocos-kdl-vendor_0.5.0-1 \
                               osqp-vendor/osqp-vendor_0.2.0-2 \
                             osrf-pycommon/osrf-pycommon_2.1.4-1 \
@@ -3459,7 +3459,6 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     ${PYTHON_PN}-pydocstyle \
     ${PYTHON_PN}-pyflakes \
     ${PYTHON_PN}-pyqt5 \
-    ${ROS_UNRESOLVED_DEP-black} \
     ${ROS_UNRESOLVED_DEP-cargo} \
     ${ROS_UNRESOLVED_DEP-clang-format} \
     ${ROS_UNRESOLVED_DEP-clang-tidy} \
@@ -3641,6 +3640,7 @@ ROS_SUPERFLORE_GENERATED_PLATFORM_PACKAGE_DEPENDENCIES = " \
     python3 \
     python3-argcomplete \
     python3-autobahn \
+    python3-black \
     python3-catkin-pkg \
     python3-catkin-pkg-native \
     python3-click \
@@ -4232,7 +4232,6 @@ ROS_SUPERFLORE_GENERATED_RECIPES_FOR_COMPONENTS = " \
 
 # Platform packages without a OE-RECIPE@OE-LAYER mapping in base.yaml, python.yaml, or ruby.yaml. Until they are added, override
 # the settings in ros-distro.inc .
-ROS_UNRESOLVED_DEP-black = "ROS_UNRESOLVED_DEP-black"
 ROS_UNRESOLVED_DEP-cargo = "ROS_UNRESOLVED_DEP-cargo"
 ROS_UNRESOLVED_DEP-clang-format = "ROS_UNRESOLVED_DEP-clang-format"
 ROS_UNRESOLVED_DEP-clang-tidy = "ROS_UNRESOLVED_DEP-clang-tidy"
@@ -4324,7 +4323,7 @@ ROS_UNRESOLVED_DEP-wayland-dev = "ROS_UNRESOLVED_DEP-wayland-dev"
 ROS_DISTRO_RELEASE_DATE = "2024-02-09"
 
 # The commit of ros/rosdistro/rolling/distribution.yaml from which the recipes were generated.
-ROS_SUPERFLORE_GENERATION_COMMIT = "f4e07369c9790cd890a4cb34c001c94e8d4aad69"
+ROS_SUPERFLORE_GENERATION_COMMIT = "09217d47bdde61b69a27d705caca1f62ff1acec6"
 
 # Version of scripts/ros-generate-cache.sh which was used to generate cache from which the recipes and this configuration
 # file were last generated

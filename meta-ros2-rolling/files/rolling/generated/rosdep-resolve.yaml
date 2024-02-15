@@ -16,7 +16,7 @@ benchmark:
 binutils:
 - binutils@openembedded-core
 black:
-- ${ROS_UNRESOLVED_DEP-black}
+- python3-black@meta-ros
 boost:
 - boost@openembedded-core
 bullet:

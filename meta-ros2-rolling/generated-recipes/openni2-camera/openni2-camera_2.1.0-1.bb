@@ -66,10 +66,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/openni2_camera-release/archive/release/rolling/openni2_camera/2.0.2-1.tar.gz
+# matches with: https://github.com/ros2-gbp/openni2_camera-release/archive/release/rolling/openni2_camera/2.1.0-1.tar.gz
 ROS_BRANCH ?= "branch=release/rolling/openni2_camera"
 SRC_URI = "git://github.com/ros2-gbp/openni2_camera-release;${ROS_BRANCH};protocol=https"
-SRCREV = "2105dbc6bd4288d328faef31ee38ab8ea19f4517"
+SRCREV = "b550150d87cdd531ced50c0649c14b0e53d4a894"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"
