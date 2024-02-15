@@ -1068,6 +1068,7 @@ python-construct:
   arch: [python-construct]
   debian: [python-construct]
   gentoo: [dev-python/construct]
+  openembedded: [python3-construct@meta-ros2]
   ubuntu:
     bionic: [python-construct]
 python-construct-pip:
@@ -4943,6 +4944,7 @@ python3-babeltrace:
   debian: [python3-babeltrace]
   fedora: [python3-babeltrace]
   gentoo: [dev-util/babeltrace]
+  openembedded: [python3-babeltrace@openembedded-core]
   opensuse: [python3-babeltrace]
   rhel:
     '*': [python3-babeltrace]
@@ -5810,6 +5812,7 @@ python3-fiona:
   rhel:
     '*': [python3-fiona]
     '7': null
+  openembedded: [python3-fiona@meta-ros2]
   ubuntu: [python3-fiona]
 python3-flake8:
   alpine: [py3-flake8]
@@ -6221,6 +6224,7 @@ python3-git:
   rhel:
     '*': [python3-GitPython]
     '7': null
+  openembedded: [python3-git@openembedded-core]
   ubuntu: [python3-git]
 python3-github:
   debian: [python3-github]
@@ -6468,6 +6472,7 @@ python3-img2pdf:
   fedora: [python3-img2pdf]
   gentoo: [media-gfx/img2pdf]
   nixos: [python3Packages.img2pdf]
+  openembedded: [python3-img2pdf@meta-ros-common]
   opensuse: [python3-img2pdf]
   rhel:
     '*': [python3-img2pdf]
@@ -6598,6 +6603,7 @@ python3-jinja2:
   rhel:
     '*': [python3-jinja2]
     '7': [python36-jinja2]
+  openembedded: [python3-jinja2@openembedded-core]
   ubuntu: [python3-jinja2]
 python3-jmespath:
   arch: [python-jmespath]
@@ -6628,6 +6634,7 @@ python3-jsonschema:
   rhel:
     '*': [python3-jsonschema]
     '7': [python36-jsonschema]
+  openembedded: [python3-jsonschema@openembedded-core]
   ubuntu: [python3-jsonschema]
 python3-junitparser:
   debian:
@@ -7061,6 +7068,7 @@ python3-natsort:
   nixos: [python3Packages.natsort]
   opensuse: [python3-natsort]
   rhel: [python3-natsort]
+  openembedded: [python3-natsort@meta-python]
   ubuntu: [python3-natsort]
 python3-nclib-pip:
   arch:
@@ -7143,6 +7151,7 @@ python3-ntplib:
   fedora: [python3-ntplib]
   gentoo: [dev-python/ntplib]
   nixos: [python3Packages.ntplib]
+  openembedded: [python3-ntplib@meta-python]
   opensuse: [python3-ntplib]
   rhel:
     '*': ['python%{python3_pkgversion}-ntplib']
@@ -7629,6 +7638,7 @@ python3-protobuf:
   rhel:
     '*': [python3-protobuf]
     '7': null
+  openembedded: [python3-protobuf@meta-python]
   ubuntu: [python3-protobuf]
 python3-psutil:
   alpine: [py3-psutil]
@@ -8223,6 +8233,7 @@ python3-pytest-timeout:
   nixos: [python3Packages.pytest-timeout]
   opensuse: [python3-pytest-timeout]
   rhel: ['python%{python3_pkgversion}-pytest-timeout']
+  openembedded: [python3-pytest-timeout@meta-python]
   ubuntu: [python3-pytest-timeout]
 python3-pytest-xdist:
   arch: [python-pytest-xdist]
@@ -8554,6 +8565,7 @@ python3-rtree:
   rhel:
     '*': [python3-rtree]
     '7': null
+  openembedded: [python3-rtree@meta-ros2]
   ubuntu: [python3-rtree]
 python3-ruamel.yaml:
   debian:
@@ -8724,6 +8736,7 @@ python3-shapely:
   fedora: [python3-shapely]
   gentoo: [sci-libs/Shapely]
   nixos: [python3Packages.shapely]
+  openembedded: [python3-shapely@meta-ros2]
   osx:
     pip:
       packages: [shapely]
@@ -9308,6 +9321,7 @@ python3-typeguard:
   fedora: [python3-typeguard]
   gentoo: [dev-python/typeguard]
   nixos: [python3Packages.typeguard]
+  openembedded: [python3-typeguard@meta-python]
   osx:
     pip:
       packages: [typeguard]
@@ -9393,6 +9407,7 @@ python3-unidiff:
   fedora: [python3-unidiff]
   gentoo: [dev-python/unidiff]
   nixos: [python3Packages.unidiff]
+  openembedded: [python3-unidiff@meta-python]
   opensuse: [python-unidiff]
   rhel: [python3-unidiff]
   ubuntu: [python3-unidiff]
@@ -9430,6 +9445,7 @@ python3-uvloop:
   fedora: [python3-uvloop]
   gentoo: [dev-python/uvloop]
   nixos: [python3Packages.uvloop]
+  openembedded: [python3-uvloop@meta-ros2]
   ubuntu: [python3-uvloop]
 python3-vcstool:
   alpine: [vcstool]
@@ -9440,6 +9456,7 @@ python3-vcstool:
     pip:
       packages: [vcstool]
   nixos: [vcstool]
+  openembedded: [python3-vcstool@meta-ros-common]
   osx:
     pip:
       packages: [vcstool]
