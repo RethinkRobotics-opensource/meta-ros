@@ -4273,17 +4273,3 @@ ROS_UNRESOLVED_DEP-rti-connext-dds-6.0.1 = "ROS_UNRESOLVED_DEP-rti-connext-dds-6
 ROS_UNRESOLVED_DEP-sdformat12 = "ROS_UNRESOLVED_DEP-sdformat12"
 ROS_UNRESOLVED_DEP-simde = "ROS_UNRESOLVED_DEP-simde"
 ROS_UNRESOLVED_DEP-spacenavd = "ROS_UNRESOLVED_DEP-spacenavd"
-
-# From the release announcement or the last field of the "<ROS_DISTRO>/YYYY-MM-DD" tag for the release in
-# https://github.com/ros/rosdistro/tags. Prior to the first release of a ROS_DISTRO, it is set to "".
-ROS_DISTRO_RELEASE_DATE = "2024-02-09"
-
-# The commit of ros/rosdistro/rolling/distribution.yaml from which the recipes were generated.
-ROS_SUPERFLORE_GENERATION_COMMIT = "09217d47bdde61b69a27d705caca1f62ff1acec6"
-
-# Version of scripts/ros-generate-cache.sh which was used to generate cache from which the recipes and this configuration
-# file were last generated
-ROS_GENERATE_CACHE_PROGRAM_VERSION = "1.7.0"
-
-# Version of scripts/ros-generate-recipes.sh which was used to generate recipes and this configuration file
-ROS_GENERATE_RECIPES_PROGRAM_VERSION = "1.7.0"
