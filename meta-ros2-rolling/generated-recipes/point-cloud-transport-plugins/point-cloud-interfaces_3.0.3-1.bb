@@ -5,29 +5,30 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "ROS2 messages for ouster lidar driver"
-AUTHOR = "Steve Macenski <stevenmacenski@gmail.com>"
-HOMEPAGE = "https://wiki.ros.org"
+DESCRIPTION = "msg definitions for use with point_cloud_transport plugins."
+AUTHOR = "Martin Pecka <peckama2@fel.cvut.cz>"
+ROS_AUTHOR = "Jakub Paplham"
+HOMEPAGE = "https://wiki.ros.org/draco_point_cloud_transport"
 SECTION = "devel"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://package.xml;beginline=9;endline=9;md5=82f0323c08605e5b6f343b05213cf7cc"
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://package.xml;beginline=9;endline=9;md5=d566ef916e9dedc494f5f793a6690ba5"
 
-ROS_CN = "ros2_ouster_drivers"
-ROS_BPN = "ouster_msgs"
+ROS_CN = "point_cloud_transport_plugins"
+ROS_BPN = "point_cloud_interfaces"
 
 ROS_BUILD_DEPENDS = " \
     builtin-interfaces \
-    rosidl-default-generators \
+    sensor-msgs \
     std-msgs \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
     ament-cmake-native \
+    rosidl-default-generators-native \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    builtin-interfaces \
-    rosidl-default-generators \
+    sensor-msgs \
     std-msgs \
 "
 
@@ -35,7 +36,8 @@ ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
     builtin-interfaces \
-    rosidl-default-generators \
+    rosidl-default-runtime \
+    sensor-msgs \
     std-msgs \
 "
 
@@ -52,10 +54,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/ros2_ouster_drivers-release/archive/release/rolling/ouster_msgs/0.5.0-2.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/ouster_msgs"
-SRC_URI = "git://github.com/ros2-gbp/ros2_ouster_drivers-release;${ROS_BRANCH};protocol=https"
-SRCREV = "148758a543ccd5faa8280f420faac69b810a60a2"
+# matches with: https://github.com/ros2-gbp/point_cloud_transport_plugins-release/archive/release/rolling/point_cloud_interfaces/3.0.3-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/point_cloud_interfaces"
+SRC_URI = "git://github.com/ros2-gbp/point_cloud_transport_plugins-release;${ROS_BRANCH};protocol=https"
+SRCREV = "4d9866d5e860b5705a20dde88935f3726506698b"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

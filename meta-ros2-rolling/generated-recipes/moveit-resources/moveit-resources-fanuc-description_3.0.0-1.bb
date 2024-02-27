@@ -5,15 +5,16 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "This packages proposes a slider-based publisher node similar to the joint_state_publisher, but that can publish any type of message or call services."
-AUTHOR = "Olivier Kermorgant <olivier.kermorgant@ec-nantes.fr>"
-HOMEPAGE = "https://wiki.ros.org"
+DESCRIPTION = "Fanuc Resources used for MoveIt testing"
+AUTHOR = "Dave Coleman <dave@dav.ee>"
+ROS_AUTHOR = "Ioan Sucan <isucan@willowgarage.edu>"
+HOMEPAGE = "http://moveit.ros.org"
 SECTION = "devel"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://package.xml;beginline=10;endline=10;md5=58e54c03ca7f821dd3967e2a2cd1596e"
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://package.xml;beginline=12;endline=12;md5=d566ef916e9dedc494f5f793a6690ba5"
 
-ROS_CN = "slider_publisher"
-ROS_BPN = "slider_publisher"
+ROS_CN = "moveit_resources"
+ROS_BPN = "moveit_resources_fanuc_description"
 
 ROS_BUILD_DEPENDS = ""
 
@@ -25,11 +26,7 @@ ROS_EXPORT_DEPENDS = ""
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
-ROS_EXEC_DEPENDS = " \
-    ${ROS_UNRESOLVED_DEP-python3-scipy} \
-    python3-numpy \
-    rqt-gui-py \
-"
+ROS_EXEC_DEPENDS = ""
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = ""
@@ -41,10 +38,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/slider_publisher-release/archive/release/rolling/slider_publisher/2.2.1-2.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/slider_publisher"
-SRC_URI = "git://github.com/ros2-gbp/slider_publisher-release;${ROS_BRANCH};protocol=https"
-SRCREV = "ef4ed3dd1aa478a956744b6398af4e9061332260"
+# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources_fanuc_description/3.0.0-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/moveit_resources_fanuc_description"
+SRC_URI = "git://github.com/ros2-gbp/moveit_resources-release;${ROS_BRANCH};protocol=https"
+SRCREV = "079f4664f4c891b14a6ca3f54a6425169bbbc0f9"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

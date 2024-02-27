@@ -76,10 +76,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/pointcloud_to_laserscan-release/archive/release/rolling/pointcloud_to_laserscan/2.0.1-3.tar.gz
+# matches with: https://github.com/ros2-gbp/pointcloud_to_laserscan-release/archive/release/rolling/pointcloud_to_laserscan/2.0.2-1.tar.gz
 ROS_BRANCH ?= "branch=release/rolling/pointcloud_to_laserscan"
 SRC_URI = "git://github.com/ros2-gbp/pointcloud_to_laserscan-release;${ROS_BRANCH};protocol=https"
-SRCREV = "dd54e0f2ca3f19f6b0b7c5e7a95d65285a327fba"
+SRCREV = "25e072e6c68501904ee40cbbc74ec1215c03e9df"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

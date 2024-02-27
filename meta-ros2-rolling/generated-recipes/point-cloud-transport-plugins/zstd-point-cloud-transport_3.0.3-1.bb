@@ -58,10 +58,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/point_cloud_transport_plugins-release/archive/release/rolling/zstd_point_cloud_transport/3.0.2-1.tar.gz
+# matches with: https://github.com/ros2-gbp/point_cloud_transport_plugins-release/archive/release/rolling/zstd_point_cloud_transport/3.0.3-1.tar.gz
 ROS_BRANCH ?= "branch=release/rolling/zstd_point_cloud_transport"
 SRC_URI = "git://github.com/ros2-gbp/point_cloud_transport_plugins-release;${ROS_BRANCH};protocol=https"
-SRCREV = "c069e2a9f33ab3b1285732a3aba5d1b9c83f352d"
+SRCREV = "9e8d4c7c762abc89084e3a7f748eef24d09f9843"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

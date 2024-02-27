@@ -5,7 +5,7 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "Fanuc Resources used for MoveIt testing"
+DESCRIPTION = "PR2 Resources used for MoveIt! testing"
 AUTHOR = "Dave Coleman <dave@dav.ee>"
 ROS_AUTHOR = "Ioan Sucan <isucan@willowgarage.edu>"
 HOMEPAGE = "http://moveit.ros.org"
@@ -14,7 +14,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://package.xml;beginline=12;endline=12;md5=d566ef916e9dedc494f5f793a6690ba5"
 
 ROS_CN = "moveit_resources"
-ROS_BPN = "moveit_resources_fanuc_description"
+ROS_BPN = "moveit_resources_pr2_description"
 
 ROS_BUILD_DEPENDS = ""
 
@@ -38,10 +38,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources_fanuc_description/2.1.1-1.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/moveit_resources_fanuc_description"
+# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources_pr2_description/3.0.0-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/moveit_resources_pr2_description"
 SRC_URI = "git://github.com/ros2-gbp/moveit_resources-release;${ROS_BRANCH};protocol=https"
-SRCREV = "72ee9912da133a3c40bbe01cec7396d74f2c2605"
+SRCREV = "108ebb6bad30b9c43a69d0e353136938945c4e3f"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

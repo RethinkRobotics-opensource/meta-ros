@@ -5,8 +5,8 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "PR2 Resources used for MoveIt! testing"
-AUTHOR = "Dave Coleman <dave@dav.ee>"
+DESCRIPTION = "Resources used for MoveIt testing"
+AUTHOR = "MoveIt Release Team <moveit_releasers@googlegroups.com>"
 ROS_AUTHOR = "Ioan Sucan <isucan@willowgarage.edu>"
 HOMEPAGE = "http://moveit.ros.org"
 SECTION = "devel"
@@ -14,7 +14,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://package.xml;beginline=12;endline=12;md5=d566ef916e9dedc494f5f793a6690ba5"
 
 ROS_CN = "moveit_resources"
-ROS_BPN = "moveit_resources_pr2_description"
+ROS_BPN = "moveit_resources"
 
 ROS_BUILD_DEPENDS = ""
 
@@ -26,7 +26,15 @@ ROS_EXPORT_DEPENDS = ""
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
-ROS_EXEC_DEPENDS = ""
+ROS_EXEC_DEPENDS = " \
+    joint-state-publisher \
+    moveit-resources-fanuc-description \
+    moveit-resources-fanuc-moveit-config \
+    moveit-resources-panda-description \
+    moveit-resources-panda-moveit-config \
+    moveit-resources-pr2-description \
+    robot-state-publisher \
+"
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = ""
@@ -38,10 +46,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources_pr2_description/2.1.1-1.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/moveit_resources_pr2_description"
+# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources/3.0.0-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/moveit_resources"
 SRC_URI = "git://github.com/ros2-gbp/moveit_resources-release;${ROS_BRANCH};protocol=https"
-SRCREV = "97cfe8baed66a8d11438d55ffa0dc4449a50b567"
+SRCREV = "e354ea65d5b44bd61bb93386e201c236d9621e17"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

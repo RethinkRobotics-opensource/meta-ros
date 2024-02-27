@@ -5,41 +5,44 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "Interfaces for data_tamer"
-AUTHOR = "Davide Faconti <davide.faconti@gmail.com>"
-ROS_AUTHOR = "Davide Faconti <davide.faconti@gmail.com>"
-HOMEPAGE = "https://wiki.ros.org"
+DESCRIPTION = "NTRIP client that will publish RTCM corrections to a ROS topic, and optionally subscribe to NMEA messages to send to an NTRIP server"
+AUTHOR = "Rob Fisher <rob.fisher@parker.com>"
+ROS_AUTHOR = "Parker Hannifin Corp"
+HOMEPAGE = "https://github.com/LORD-MicroStrain/ntrip_client"
 SECTION = "devel"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://package.xml;beginline=9;endline=9;md5=58e54c03ca7f821dd3967e2a2cd1596e"
 
-ROS_CN = "data_tamer"
-ROS_BPN = "data_tamer_msgs"
+ROS_CN = "ntrip_client"
+ROS_BPN = "ntrip_client"
 
 ROS_BUILD_DEPENDS = " \
-    builtin-interfaces \
+    nmea-msgs \
+    rclpy \
+    rtcm-msgs \
+    std-msgs \
 "
 
-ROS_BUILDTOOL_DEPENDS = " \
-    ament-cmake-native \
-    rosidl-default-generators-native \
-"
+ROS_BUILDTOOL_DEPENDS = ""
 
 ROS_EXPORT_DEPENDS = " \
-    builtin-interfaces \
+    nmea-msgs \
+    rclpy \
+    rtcm-msgs \
+    std-msgs \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    builtin-interfaces \
-    rosidl-default-runtime \
+    nmea-msgs \
+    rclpy \
+    rtcm-msgs \
+    std-msgs \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
-ROS_TEST_DEPENDS = " \
-    ament-lint-common \
-"
+ROS_TEST_DEPENDS = ""
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
 # Bitbake doesn't support the "export" concept, so build them as if we needed them to build this package (even though we actually
@@ -48,12 +51,12 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/data_tamer-release/archive/release/rolling/data_tamer_msgs/0.9.1-1.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/data_tamer_msgs"
-SRC_URI = "git://github.com/ros2-gbp/data_tamer-release;${ROS_BRANCH};protocol=https"
-SRCREV = "a6d83000dc6190a84abd23fc69e0b99feb33eaa5"
+# matches with: https://github.com/ros2-gbp/ntrip_client-release/archive/release/rolling/ntrip_client/1.3.0-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/ntrip_client"
+SRC_URI = "git://github.com/ros2-gbp/ntrip_client-release;${ROS_BRANCH};protocol=https"
+SRCREV = "13222a3c8ed2ff3e6aeca6a750aa6158804be970"
 S = "${WORKDIR}/git"
 
-ROS_BUILD_TYPE = "ament_cmake"
+ROS_BUILD_TYPE = "ament_python"
 
 inherit ros_${ROS_BUILD_TYPE}

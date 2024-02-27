@@ -47,10 +47,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/mp2p_icp-release/archive/release/rolling/mp2p_icp/1.1.1-1.tar.gz
+# matches with: https://github.com/ros2-gbp/mp2p_icp-release/archive/release/rolling/mp2p_icp/1.2.0-1.tar.gz
 ROS_BRANCH ?= "branch=release/rolling/mp2p_icp"
 SRC_URI = "git://github.com/ros2-gbp/mp2p_icp-release;${ROS_BRANCH};protocol=https"
-SRCREV = "3a29fbbea168f3f5b82a2f401a09c235c48fcba4"
+SRCREV = "c043c04e81360ecc6258787d2c681dca58b1b1c5"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "cmake"

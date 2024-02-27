@@ -5,16 +5,16 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "Resources used for MoveIt testing"
-AUTHOR = "MoveIt Release Team <moveit_releasers@googlegroups.com>"
-ROS_AUTHOR = "Ioan Sucan <isucan@willowgarage.edu>"
+DESCRIPTION = "<p>       MoveIt Resources for testing: Fanuc M-10iA.     </p>     <p>       A project-internal configuration for testing in MoveIt.     </p>"
+AUTHOR = "Dave Coleman <dave@dav.ee>"
+ROS_AUTHOR = "Dave Coleman <dave@dav.ee>"
 HOMEPAGE = "http://moveit.ros.org"
 SECTION = "devel"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://package.xml;beginline=12;endline=12;md5=d566ef916e9dedc494f5f793a6690ba5"
+LIC_FILES_CHKSUM = "file://package.xml;beginline=16;endline=16;md5=d566ef916e9dedc494f5f793a6690ba5"
 
 ROS_CN = "moveit_resources"
-ROS_BPN = "moveit_resources"
+ROS_BPN = "moveit_resources_fanuc_moveit_config"
 
 ROS_BUILD_DEPENDS = ""
 
@@ -29,11 +29,9 @@ ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 ROS_EXEC_DEPENDS = " \
     joint-state-publisher \
     moveit-resources-fanuc-description \
-    moveit-resources-fanuc-moveit-config \
-    moveit-resources-panda-description \
-    moveit-resources-panda-moveit-config \
-    moveit-resources-pr2-description \
     robot-state-publisher \
+    tf2-ros \
+    xacro \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
@@ -46,10 +44,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources/2.1.1-1.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/moveit_resources"
+# matches with: https://github.com/ros2-gbp/moveit_resources-release/archive/release/rolling/moveit_resources_fanuc_moveit_config/3.0.0-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/moveit_resources_fanuc_moveit_config"
 SRC_URI = "git://github.com/ros2-gbp/moveit_resources-release;${ROS_BRANCH};protocol=https"
-SRCREV = "846fe7c15959f9d2a7a775e537063d90e4c20c11"
+SRCREV = "91f11a3834678d0ec4c4e2345111c8cbc83728c1"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

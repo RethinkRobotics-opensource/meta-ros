@@ -5,41 +5,39 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "Bosch BNO055 IMU driver for ROS2"
-AUTHOR = "flynneva <evanflynn.msu@gmail.com>"
+DESCRIPTION = "Visualization plugin for several sensors."
+AUTHOR = "Eloy Bricneo <eloy.briceno@ekumenlabs.com>"
 HOMEPAGE = "https://wiki.ros.org"
 SECTION = "devel"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://package.xml;beginline=8;endline=8;md5=d566ef916e9dedc494f5f793a6690ba5"
+# Original license in package.xml, joined with "&" when multiple license tags were used:
+#         "BSD Clause 3"
+LICENSE = "BSD-Clause-3"
+LIC_FILES_CHKSUM = "file://package.xml;beginline=10;endline=10;md5=e2197b8633fd51a47f897d9d6f820c24"
 
-ROS_CN = "bno055"
-ROS_BPN = "bno055"
+ROS_CN = "rqt_gauges"
+ROS_BPN = "rqt_gauges"
 
-ROS_BUILD_DEPENDS = " \
-    python3-pyserial \
-"
+ROS_BUILD_DEPENDS = ""
 
 ROS_BUILDTOOL_DEPENDS = ""
 
-ROS_EXPORT_DEPENDS = " \
-    python3-pyserial \
-"
+ROS_EXPORT_DEPENDS = ""
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    example-interfaces \
-    python3-pyserial \
+    ament-index-python \
+    qt-gui \
+    qt-gui-py-common \
     rclpy \
-    std-msgs \
+    rqt-gui \
+    rqt-gui-py \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = " \
-    ament-copyright \
     ament-flake8 \
-    ament-pep257 \
-    python3-pytest \
+    ament-xmllint \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
@@ -49,10 +47,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/bno055-release/archive/release/rolling/bno055/0.4.1-3.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/bno055"
-SRC_URI = "git://github.com/ros2-gbp/bno055-release;${ROS_BRANCH};protocol=https"
-SRCREV = "4a61b9380db8626b0105bbc42511259c7e315934"
+# matches with: https://github.com/ros2-gbp/rqt_gauges-release/archive/release/rolling/rqt_gauges/0.0.2-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/rqt_gauges"
+SRC_URI = "git://github.com/ros2-gbp/rqt_gauges-release;${ROS_BRANCH};protocol=https"
+SRCREV = "9f6f9afe1534b2344df752320a6e2c222596f3db"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_python"

@@ -5,21 +5,20 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "DataTamer data logging library"
-AUTHOR = "Davide Faconti <davide.faconti@gmail.com>"
-ROS_AUTHOR = "Davide Faconti"
+DESCRIPTION = "ROS2 messages for ouster lidar driver"
+AUTHOR = "Steve Macenski <stevenmacenski@gmail.com>"
 HOMEPAGE = "https://wiki.ros.org"
 SECTION = "devel"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://package.xml;beginline=11;endline=11;md5=58e54c03ca7f821dd3967e2a2cd1596e"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://package.xml;beginline=9;endline=9;md5=82f0323c08605e5b6f343b05213cf7cc"
 
-ROS_CN = "data_tamer"
-ROS_BPN = "data_tamer_cpp"
+ROS_CN = "ros2_ouster_drivers"
+ROS_BPN = "ouster_msgs"
 
 ROS_BUILD_DEPENDS = " \
-    data-tamer-msgs \
-    mcap-vendor \
-    rclcpp \
+    builtin-interfaces \
+    rosidl-default-generators \
+    std-msgs \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
@@ -27,22 +26,23 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    data-tamer-msgs \
-    mcap-vendor \
-    rclcpp \
+    builtin-interfaces \
+    rosidl-default-generators \
+    std-msgs \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    data-tamer-msgs \
-    mcap-vendor \
-    rclcpp \
+    builtin-interfaces \
+    rosidl-default-generators \
+    std-msgs \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = " \
-    ament-cmake-gtest \
+    ament-lint-auto \
+    ament-lint-common \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
@@ -52,10 +52,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/data_tamer-release/archive/release/rolling/data_tamer_cpp/0.9.1-1.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/data_tamer_cpp"
-SRC_URI = "git://github.com/ros2-gbp/data_tamer-release;${ROS_BRANCH};protocol=https"
-SRCREV = "b07785de113e843e11bd9527eea963551e30d9e7"
+# matches with: https://github.com/ros2-gbp/ros2_ouster_drivers-release/archive/release/rolling/ouster_msgs/0.5.1-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/ouster_msgs"
+SRC_URI = "git://github.com/ros2-gbp/ros2_ouster_drivers-release;${ROS_BRANCH};protocol=https"
+SRCREV = "98311c1e31bbe1f0c44a5550e3a939d0a7727476"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

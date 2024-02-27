@@ -5,39 +5,44 @@
 inherit ros_distro_rolling
 inherit ros_superflore_generated
 
-DESCRIPTION = "Visualization plugin for several sensors."
-AUTHOR = "Eloy Bricneo <eloy.briceno@ekumenlabs.com>"
+DESCRIPTION = "Bosch BNO055 IMU driver for ROS2"
+AUTHOR = "flynneva <evanflynn.msu@gmail.com>"
 HOMEPAGE = "https://wiki.ros.org"
 SECTION = "devel"
-# Original license in package.xml, joined with "&" when multiple license tags were used:
-#         "BSD Clause 3"
-LICENSE = "BSD-Clause-3"
-LIC_FILES_CHKSUM = "file://package.xml;beginline=10;endline=10;md5=e2197b8633fd51a47f897d9d6f820c24"
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://package.xml;beginline=8;endline=8;md5=d566ef916e9dedc494f5f793a6690ba5"
 
-ROS_CN = "rqt_gauges"
-ROS_BPN = "rqt_gauges"
+ROS_CN = "bno055"
+ROS_BPN = "bno055"
 
-ROS_BUILD_DEPENDS = ""
+ROS_BUILD_DEPENDS = " \
+    ${ROS_UNRESOLVED_DEP-python3-smbus} \
+    python3-pyserial \
+"
 
 ROS_BUILDTOOL_DEPENDS = ""
 
-ROS_EXPORT_DEPENDS = ""
+ROS_EXPORT_DEPENDS = " \
+    ${ROS_UNRESOLVED_DEP-python3-smbus} \
+    python3-pyserial \
+"
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
 ROS_EXEC_DEPENDS = " \
-    ament-index-python \
-    qt-gui \
-    qt-gui-py-common \
+    ${ROS_UNRESOLVED_DEP-python3-smbus} \
+    example-interfaces \
+    python3-pyserial \
     rclpy \
-    rqt-gui \
-    rqt-gui-py \
+    std-msgs \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
 ROS_TEST_DEPENDS = " \
+    ament-copyright \
     ament-flake8 \
-    ament-xmllint \
+    ament-pep257 \
+    python3-pytest \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
@@ -47,10 +52,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/rqt_gauges-release/archive/release/rolling/rqt_gauges/0.0.1-1.tar.gz
-ROS_BRANCH ?= "branch=release/rolling/rqt_gauges"
-SRC_URI = "git://github.com/ros2-gbp/rqt_gauges-release;${ROS_BRANCH};protocol=https"
-SRCREV = "9a91ac6539bb16b15ff872e9dffc57150f97604d"
+# matches with: https://github.com/ros2-gbp/bno055-release/archive/release/rolling/bno055/0.5.0-1.tar.gz
+ROS_BRANCH ?= "branch=release/rolling/bno055"
+SRC_URI = "git://github.com/ros2-gbp/bno055-release;${ROS_BRANCH};protocol=https"
+SRCREV = "95a6d1b7092326f5c232b1a95405ee2599d13642"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_python"

@@ -91,10 +91,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/ros2_ouster_drivers-release/archive/release/rolling/ros2_ouster/0.5.0-2.tar.gz
+# matches with: https://github.com/ros2-gbp/ros2_ouster_drivers-release/archive/release/rolling/ros2_ouster/0.5.1-1.tar.gz
 ROS_BRANCH ?= "branch=release/rolling/ros2_ouster"
 SRC_URI = "git://github.com/ros2-gbp/ros2_ouster_drivers-release;${ROS_BRANCH};protocol=https"
-SRCREV = "468a158150d741b45647c17eda6aa8bbffc41857"
+SRCREV = "b8a78de5c35d2ca0c1288c3586bd7101c1a1568c"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"

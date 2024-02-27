@@ -22,6 +22,7 @@ ROS_BUILD_DEPENDS = " \
     point-cloud-interfaces \
     point-cloud-transport \
     rclcpp \
+    rcpputils \
     sensor-msgs \
     std-msgs \
 "
@@ -34,6 +35,7 @@ ROS_EXPORT_DEPENDS = " \
     point-cloud-interfaces \
     point-cloud-transport \
     rclcpp \
+    rcpputils \
     sensor-msgs \
     std-msgs \
 "
@@ -46,6 +48,7 @@ ROS_EXEC_DEPENDS = " \
     point-cloud-interfaces \
     point-cloud-transport \
     rclcpp \
+    rcpputils \
     sensor-msgs \
     std-msgs \
 "
@@ -63,10 +66,10 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-# matches with: https://github.com/ros2-gbp/point_cloud_transport_plugins-release/archive/release/rolling/draco_point_cloud_transport/3.0.2-1.tar.gz
+# matches with: https://github.com/ros2-gbp/point_cloud_transport_plugins-release/archive/release/rolling/draco_point_cloud_transport/3.0.3-1.tar.gz
 ROS_BRANCH ?= "branch=release/rolling/draco_point_cloud_transport"
 SRC_URI = "git://github.com/ros2-gbp/point_cloud_transport_plugins-release;${ROS_BRANCH};protocol=https"
-SRCREV = "6ffb909277f9f741ab20bf97d59930c7fe742a6a"
+SRCREV = "bbc104fbcff55af50543db17ad308fb28bc7db57"
 S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"
