@@ -1,4 +1,4 @@
-# rolling/cache.yaml 2024-02-09 09217d47bdde61b69a27d705caca1f62ff1acec6 20240214205735 1.7.0
+# rolling/cache.yaml 2024-02-27 d4ab33b35b017a1ac88126edd46a22555dfd48dc 20240226024223 1.7.0
 distribution_file:
 - release_platforms:
 -----
@@ -808,7 +808,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/bno055-release.git',
-version: 0.4.1-3
+version: 0.5.0-1
 },
 source: {
 type: git,
@@ -1240,7 +1240,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/data_tamer-release.git',
-version: 0.9.1-1
+version: 0.9.4-2
 },
 source: {
 test_pull_requests: true,
@@ -1839,21 +1839,21 @@ fastrtps: {
 doc: {
 type: git,
 url: 'https://github.com/eProsima/Fast-RTPS.git',
-version: 2.11.x
+version: 2.13.x
 },
 release: {
 tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/fastrtps-release.git',
-version: 2.11.2-1
+version: 2.13.2-1
 },
 source: {
 test_commits: true,
 test_pull_requests: false,
 type: git,
 url: 'https://github.com/eProsima/Fast-DDS.git',
-version: 2.11.x
+version: 2.13.x
 },
 status: maintained
 }
@@ -4087,7 +4087,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/moveit_resources-release.git',
-version: 2.1.1-1
+version: 3.0.0-1
 },
 source: {
 type: git,
@@ -4129,7 +4129,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/mp2p_icp-release.git',
-version: 1.1.1-1
+version: 1.2.0-1
 },
 source: {
 type: git,
@@ -4594,7 +4594,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/ntrip_client-release.git',
-version: 1.2.0-2
+version: 1.3.0-1
 },
 source: {
 test_pull_requests: true,
@@ -5335,7 +5335,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/point_cloud_transport-release.git',
-version: 3.0.3-1
+version: 3.0.4-1
 },
 source: {
 test_pull_requests: true,
@@ -5362,7 +5362,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/point_cloud_transport_plugins-release.git',
-version: 3.0.2-1
+version: 3.0.3-1
 },
 source: {
 test_pull_requests: true,
@@ -5406,7 +5406,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/pointcloud_to_laserscan-release.git',
-version: 2.0.1-3
+version: 2.0.2-1
 },
 source: {
 test_pull_requests: true,
@@ -7029,7 +7029,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/ros2_ouster_drivers-release.git',
-version: 0.5.0-2
+version: 0.5.1-1
 },
 source: {
 test_pull_requests: true,
@@ -7930,7 +7930,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/rqt_gauges-release.git',
-version: 0.0.1-1
+version: 0.0.2-1
 },
 source: {
 type: git,
@@ -8624,7 +8624,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/simple_launch-release.git',
-version: 1.8.0-1
+version: 1.9.1-1
 },
 source: {
 type: git,
@@ -8645,7 +8645,7 @@ tags: {
 release: 'release/rolling/{package}/{version}'
 },
 url: 'https://github.com/ros2-gbp/slider_publisher-release.git',
-version: 2.2.1-2
+version: 2.3.1-1
 },
 source: {
 type: git,
@@ -12513,6 +12513,7 @@ bno055: <?xml version="1.0" ?>
 <maintainer email="evanflynn.msu@gmail.com">flynneva</maintainer>
 <license>BSD</license>
 <depend>python3-serial</depend>
+<depend>python3-smbus</depend>
 <exec_depend>rclpy</exec_depend>
 <exec_depend>std_msgs</exec_depend>
 <exec_depend>example_interfaces</exec_depend>
@@ -14391,6 +14392,7 @@ draco_point_cloud_transport: <?xml version="1.0" ?>
 <depend>point_cloud_interfaces</depend>
 <depend>point_cloud_transport</depend>
 <depend>rclcpp</depend>
+<depend>rcpputils</depend>
 <depend>sensor_msgs</depend>
 <depend>std_msgs</depend>
 <test_depend>ament_lint_auto</test_depend>
@@ -24257,7 +24259,7 @@ and optionally subscribe to NMEA messages to send to an NTRIP server</descriptio
 <url type="website">https://github.com/LORD-MicroStrain/ntrip_client</url>
 <depend>rclpy</depend>
 <depend>std_msgs</depend>
-<depend>mavros_msgs</depend>
+<depend>rtcm_msgs</depend>
 <depend>nmea_msgs</depend>
 <export>
 <build_type>ament_python</build_type>
